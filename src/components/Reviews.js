@@ -3,9 +3,23 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import './styles/Reviews.css';
+import { Helmet } from 'react-helmet';
+
 const Reviews = () => {
   return (
     <div>
+<Helmet>
+  <title>Testimonials - Mays' Portfolio</title>
+  <meta
+    name="description"
+    content="Read testimonials from clients and colleagues who have worked with Mays. See how her skills in web development, React, and JavaScript have helped deliver outstanding results."
+  />
+  <meta
+    name="keywords"
+    content="Testimonials, Client Feedback, Mays Portfolio, Web Development, React, JavaScript, Frontend Development, UI/UX, Professional Reviews, Web Design"
+  />
+</Helmet>
+
 
 <section className="reviews-section" id="reviews">
       <div className="top-header">

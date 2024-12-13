@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Typed from "typed.js";
 import "./styles/style.css";
+import { Helmet } from 'react-helmet';
+
 
 const FeaturedBox = () => {
   useEffect(() => {
@@ -20,7 +22,20 @@ const FeaturedBox = () => {
   }, []);
 
   return (
-    <section className="featured-box section" id="home">
+    <div>
+      <Helmet>
+  <title>Featured - Mays' Portfolio</title>
+  <meta
+    name="description"
+    content="Explore Mays' featured projects that highlight her skills in web development, including React, JavaScript, and UI/UX design. See how her work delivers innovative solutions."
+  />
+  <meta
+    name="keywords"
+    content="Featured Projects, Web Developer, React, JavaScript, Frontend Development, UI/UX, Portfolio, Web Design, Mays Portfolio"
+  />
+</Helmet>
+
+ <section className="featured-box section" id="home">
       <div className="featured-text">
         <div className="hello">
           <p>
@@ -94,6 +109,8 @@ const FeaturedBox = () => {
         </div>
       </div>
     </section>
+    </div>
+   
   );
 };
 

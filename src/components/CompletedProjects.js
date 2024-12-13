@@ -3,10 +3,20 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import './styles/CompletedProjects.css';
+import { Helmet } from 'react-helmet';
 
 const CompletedProjects = () => {
   return (
     <div>
+       <Helmet>
+  <title>Completed Projects - Mays' Portfolio</title>
+  <meta
+    name="description"
+    content="Explore the completed projects by Mays, showcasing web development skills in React, JavaScript, and more. Learn about the projects I’ve worked on and how they highlight my expertise."
+  />
+  <meta name="keywords" content="Completed Projects, React Projects, Web Development, JavaScript, Portfolio, Frontend Developer, UI/UX, Web Applications" />
+</Helmet>
+
       <Navbar />
       <section className="projects-section">
         <h1 className="section-title">My Projects</h1>

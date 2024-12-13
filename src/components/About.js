@@ -1,10 +1,17 @@
 import React from "react";
 import './styles/style.css';
+import { Helmet } from 'react-helmet';
 
 
 
 const About = () => {
   return (
+    <div>
+  <Helmet>
+      <title>Mays' Portfolio - Mays' Portfolio</title>
+      <meta name="description" content="About Mays' portfolio, her passion for web development, and her experiences." />
+    </Helmet>
+ 
 <section className="section" id="about">
   <div className="top-header">
     <h1>About me</h1>
@@ -28,6 +35,8 @@ const About = () => {
     </div>
   </div>
 </section>
+    </div>
+  
   );
 };
 

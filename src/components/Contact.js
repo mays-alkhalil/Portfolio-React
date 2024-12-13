@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import './styles/style.css';
+import { Helmet } from 'react-helmet';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -50,6 +51,19 @@ const Contact = () => {
   };
     
   return (
+    <div> 
+          <Helmet>
+  <title>Contact Me - Mays' Portfolio</title>
+  <meta
+    name="description"
+    content="Get in touch with Mays to discuss projects, collaborations, or for any inquiries. Reach out through email or fill out the contact form."
+  />
+  <meta
+    name="keywords"
+    content="Contact, Web Developer, Mays Portfolio, Contact Form, Web Development, JavaScript, React, Reach out"
+  />
+</Helmet>
+
     <section className="section" id="contact">
       <div className="top-header">
         <h1>Let's Work Together</h1>
@@ -114,6 +128,9 @@ const Contact = () => {
         </div>
       </div>
     </section>
+
+
+    </div>
   );
 };
  

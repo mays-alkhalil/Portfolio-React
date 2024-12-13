@@ -3,9 +3,23 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import './styles/Experience.css';
 import './styles/style.css';
+import { Helmet } from 'react-helmet';
+
 const Experience = () => {
     return (
         <div>
+            <Helmet>
+  <title>Experience - Mays' Portfolio</title>
+  <meta
+    name="description"
+    content="Explore Mays' professional experience as a Web Developer, including projects and roles in React, JavaScript, and more. Learn how her skills can help bring your ideas to life."
+  />
+  <meta
+    name="keywords"
+    content="Experience, Web Developer, Mays Portfolio, JavaScript, React, Frontend Development, Web Development, Professional Experience"
+  />
+</Helmet>
+
             <Navbar />
             <section className="experience-section">
             <h1 className="section-title">My Experience</h1>
