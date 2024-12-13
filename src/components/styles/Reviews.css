@@ -1,0 +1,154 @@
+/* index.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.dark {
+    background: var(--body-color);
+    color: var(--text-color); /* استخدام المتغير لتطبيق لون النص */
+}
+
+body {
+    background: var(--body-color);
+    color: var(--text-color); /* استخدام المتغير لتطبيق لون النص */
+}
+
+.reviews-section {
+    padding-block: 5em;
+    background: #f0f4f8;
+}
+
+.top-header h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin: 2em;
+    position: relative;
+}
+
+.top-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #8749f2;
+    border-radius: 2px;
+}
+
+/* .reviews-container: تنسيق الحاوية */
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-items: center;
+}
+
+/* .review-card: تنسيق البطاقات */
+.review-card {
+    position: relative;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    display: flex;
+    gap: 20px;
+    width: 90%; /* ملء العرض الكامل */
+    /* margin:10px 30px; */
+}
+
+/* .review-card:hover: تأثير عند التمرير */
+.review-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* .img-box: تنسيق الصورة داخل البطاقة */
+.img-box {
+    min-width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(135, 73, 242, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+/* .img-box img: تنسيق الصورة داخل الدائرة */
+.img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* .review-content: تنسيق محتوى المراجعة */
+.review-content {
+    max-width: 70%;
+}
+
+/* عنوان المراجعة */
+.review-content h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #8749f2;
+    margin-bottom: 10px;
+}
+
+/* نص المراجعة */
+.review-content p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* تأثير عند التمرير على الصورة */
+.review-card:hover .img-box {
+    box-shadow: 0 10px 20px rgba(135, 73, 242, 0.6);
+}
+
+/* التعديلات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    /* حاوية المراجعات */
+    .reviews-container {
+        grid-template-columns: 1fr; /* عمود واحد */
+        padding: 0 10px; /* إضافة مساحة على اليمين واليسار */
+    }
+
+    /* المراجعة */
+    .review-card {
+        flex-direction: column; /* تغيير الترتيب إلى عمودي */
+        padding: 20px; /* تقليل الحشو */
+    }
+
+    /* محتوى المراجعة */
+    .review-content {
+        max-width: 100%; /* جعل المحتوى يأخذ العرض الكامل */
+        margin-top: 15px; /* إضافة مسافة بين الصورة والمحتوى */
+    }
+
+    /* تحسين الخطوط */
+    .top-header h1 {
+        font-size: 28px; /* تصغير الخط للأجهزة الصغيرة */
+    }
+
+    .review-content h3 {
+        font-size: 18px; /* تصغير حجم العنوان */
+    }
+
+    .review-content p {
+        font-size: 14px; /* تصغير النص */
+    }
+
+    /* تحسين حجم الصورة */
+    .img-box {
+        width: 80px; /* تقليص حجم الصورة */
+        height: 80px; /* تقليص حجم الصورة */
+    }
+}

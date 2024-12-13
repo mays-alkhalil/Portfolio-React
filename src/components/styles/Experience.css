@@ -1,0 +1,137 @@
+/* وضع الأنماط هنا (مثل الأنماط التي كنت تستخدمها في ملف style.css) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.dark {
+    background: var(--body-color);
+    color: var(--text-color); /* استخدام المتغير لتطبيق لون النص */
+}
+
+
+ body {
+    background: var(--body-color);
+    color: var(--text-color); /* استخدام المتغير لتطبيق لون النص */
+}
+
+.experience-section {
+    padding: 50px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #8749f2;
+}
+
+.experience-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* عرض عمودين */
+    gap: 30px;
+    justify-items: center;
+}
+
+.experience-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    height: 250px; /* تم تعديل الارتفاع ليكون أعلى */
+    width: 100%; /* العرض يكون بنسبة 100% */
+    max-width: 350px; /* تحديد الحد الأقصى لعرض البطاقة */
+    margin-top: 30px;
+  
+        font-family: 'Poppins', sans-serif;
+        background: var(--body-color);
+        color: var(--text-color);
+        overflow-x: hidden;
+      
+}
+
+.experience-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.experience-card h3 {
+    font-size: 24px;
+    color: var(--text-color);
+    margin: 20px 0;
+}
+
+.experience-card p {
+    padding: 0 20px;
+    color: var(--text-color);
+    font-size: 16px; /* تعديل حجم الخط لتناسب الشاشات الصغيرة */
+}
+
+.experience-card .btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #8749f2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.experience-card .btn:hover {
+    background-color: #e6d12e;
+    color: #8749f2;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .experience-container {
+        grid-template-columns: repeat(2, 1fr); /* عرض عمودين */
+    }
+}
+
+@media (max-width: 768px) {
+    .experience-container {
+        grid-template-columns: 1fr; /* بطاقة واحدة في العرض الأصغر */
+        gap: 20px; /* تقليل المسافة بين العناصر */
+    }
+
+    .experience-card {
+        height: 220px; /* تقليل الارتفاع في الشاشات الصغيرة */
+        margin-top: 20px;
+    }
+
+    .section-title {
+        font-size: 28px; /* تقليل حجم العنوان */
+    }
+
+    .experience-card h3 {
+        font-size: 20px; /* تقليل حجم النص في العنوان */
+    }
+
+    .experience-card p {
+        font-size: 14px; /* تقليل حجم النص في الوصف */
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .experience-container {
+        grid-template-columns: 1fr; /* عرض عمود واحد */
+    }
+
+    .experience-card {
+        height: 200px; /* تقليل ارتفاع البطاقة بشكل أكبر */
+    }
+
+    .experience-card .btn {
+        padding: 8px 16px; /* تقليل حجم الأزرار في الشاشات الصغيرة جداً */
+    }
+}
