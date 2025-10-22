@@ -8,46 +8,65 @@ import { Helmet } from 'react-helmet';
 const Reviews = () => {
   return (
     <div>
-<Helmet>
-  <title>Testimonials - Mays' Portfolio</title>
-  <meta
-    name="description"
-    content="Read testimonials from clients and colleagues who have worked with Mays. See how her skills in web development, React, and JavaScript have helped deliver outstanding results."
-  />
-  <meta
-    name="keywords"
-    content="Testimonials, Client Feedback, Mays Portfolio, Web Development, React, JavaScript, Frontend Development, UI/UX, Professional Reviews, Web Design"
-  />
-</Helmet>
+      <Helmet>
+        <title>Testimonials - Mays' Portfolio</title>
+        <meta
+          name="description"
+          content="Read testimonials from colleagues, mentors, and project partners who collaborated with Mays Al Khalil on various web development and AI-driven projects."
+        />
+        <meta
+          name="keywords"
+          content="Testimonials, Feedback, Mays Al Khalil, Web Development, React, JavaScript, Frontend, UI/UX, Safar AI, Zaha Center, Professional Reviews"
+        />
+      </Helmet>
 
+      <section className="reviews-section" id="reviews">
+        <div className="top-header">
+          <h1>What People Say</h1>
+          <p className="subtitle">Words from colleagues, mentors, and collaborators</p>
+        </div>
 
-<section className="reviews-section" id="reviews">
-      <div className="top-header">
-        <h1>What People Say</h1>
-      </div>
-
-      <div className="reviews-container">
-        {[
-          { name: "John Doe", text: "Working with Mays was a pleasure. Her professionalism and skillset exceeded all expectations. Highly recommend!" },
-          { name: "Jane Smith", text: "Fantastic experience! Mays's attention to detail and innovative approach brought our project to life in ways we couldn't imagine." },
-          { name: "Mike Johnson", text: "Mays has a unique talent for web development, providing creative and efficient solutions that truly transformed our platform." },
-          { name: "Emily Davis", text: "Her dedication and work ethic are unparalleled. The end result was nothing short of amazing. Will definitely work with Mays again." }
-        ].map((review, index) => (
-          <div key={index} className="review-card">
-            <div className="img-box">
-              <img src="https://via.placeholder.com/100" alt={review.name} />
+        <div className="reviews-container">
+          {[
+            { 
+              name: "Rahaf Al-Zoubi", 
+              role: "Programming Instructor · Orange Academy",
+              text: "Mays stood out among her peers for her strong technical foundation and creativity. She brings energy, precision, and a deep sense of responsibility to every project she works on."
+            },
+            { 
+              name: "Dr. Ahmad Khalil", 
+              role: "Academic Supervisor · Al-Balqa Applied University",
+              text: "Mays demonstrates exceptional problem-solving abilities and a remarkable drive to learn. Her analytical mindset and collaborative spirit make her a true asset to any development team."
+            },
+            { 
+              name: "Sara Al-Majali", 
+              role: "Project Manager · Zaha Cultural Center",
+              text: "Working with Mays on the volunteering platform was a great experience. Her focus on usability and her clean, efficient code helped us launch a smooth and engaging system for families and volunteers."
+            },
+            { 
+              name: "Mohammad Al-Ajarmeh", 
+              role: "Founder · Safar AI",
+              text: "Mays played a vital role in shaping the front-end architecture of Safar AI. Her leadership, attention to detail, and ability to translate complex ideas into intuitive design made a huge difference."
+            }
+          ].map((review, index) => (
+            <div key={index} className="review-card">
+              <div className="img-box">
+                <img 
+                  src={`https://via.placeholder.com/100?text=${review.name.charAt(0)}`} 
+                  alt={review.name} 
+                />
+              </div>
+              <div className="review-content">
+                <h3>{review.name}</h3>
+                <span className="review-role">{review.role}</span>
+                <p>{review.text}</p>
+              </div>
             </div>
-            <div className="review-content">
-              <h3>{review.name}</h3>
-              <p>{review.text}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-    <Footer />
+          ))}
+        </div>
+      </section>
+      <Footer />
     </div>
-    
   );
 };
 

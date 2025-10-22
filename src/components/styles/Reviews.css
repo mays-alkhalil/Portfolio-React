@@ -151,4 +151,12 @@ body {
         width: 80px; /* تقليص حجم الصورة */
         height: 80px; /* تقليص حجم الصورة */
     }
+    .review-role {
+  display: block;
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
 }
