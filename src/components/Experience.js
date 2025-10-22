@@ -25,41 +25,24 @@ const Experience = () => {
             <section className="experience-section">
                 <h1 className="section-title">My Experience</h1>
                 <div className="experience-container">
-
-                    {/* Experience 1 */}
                     <div className="experience-card">
-                        <h3>Frontend Developer</h3>
-                        <p>Developed responsive websites using HTML, CSS, and JavaScript. Collaborated with designers to enhance user experiences and ensure accessibility compliance.</p>
+                        <h3>Lead Frontend Engineer · Safar AI</h3>
+                        <p>Architected the design system and conversational UI powering Safar AI’s travel concierge. Delivered SSR-ready React flows, edge-cached APIs, and accessibility compliant components that scaled to thousands of itineraries.</p>
                     </div>
 
-                    {/* Experience 2 */}
                     <div className="experience-card">
-                        <h3>Backend Developer</h3>
-                        <p>Designed and implemented RESTful APIs using Laravel and Node.js. Ensured database optimization and system scalability to support high-traffic applications.</p>
+                        <h3>Product Developer · Zaha Cultural Center</h3>
+                        <p>Designing a volunteer engagement platform that manages workshop enrollment, attendance analytics, and mentor scheduling for the center’s STEAM initiatives.</p>
                     </div>
 
-                    {/* Experience 3 */}
                     <div className="experience-card">
-                        <h3>Project Manager</h3>
-                        <p>Led projects from conception to completion, coordinating with cross-functional teams to ensure timely delivery and quality. Successfully managed budgets and project timelines.</p>
+                        <h3>Full Stack Developer · Freelance</h3>
+                        <p>Delivered bespoke dashboards and content platforms across Laravel, Node.js, and React. Optimised APIs, orchestrated deployments, and mentored clients on sustainable workflows.</p>
                     </div>
 
-                    {/* Experience 4 */}
                     <div className="experience-card">
-                        <h3>Problem Solver</h3>
-                        <p>Utilized logical thinking and programming skills to troubleshoot complex software issues. Streamlined workflows, reducing development time by 20% on multiple projects.</p>
-                    </div>
-
-                    {/* Experience 5 */}
-                    <div className="experience-card">
-                        <h3> Full Stack Developer</h3>
-                        <p>Worked on backend APIs and improved application performance. Gained hands-on experience in debugging and deploying software solutions in a collaborative environment.</p>
-                    </div>
-
-                    {/* Experience 6 */}
-                    <div className="experience-card">
-                        <h3>Team Leader</h3>
-                        <p>Mentored junior developers and facilitated code reviews. Spearheaded team meetings to ensure alignment on project goals and deliverables.</p>
+                        <h3>UI Engineer · Community Projects</h3>
+                        <p>Rapid prototyping and user testing for non-profits and local startups. Led discovery sprints, Figma-to-code handoff, and performance budgets.</p>
                     </div>
                 </div>
             </section>

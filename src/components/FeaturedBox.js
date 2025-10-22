@@ -8,7 +8,7 @@ const FeaturedBox = () => {
   useEffect(() => {
     // Initialize Typed effect
     const typed = new Typed(".typedText", {
-      strings: ["Coder", "Developer"], // النصوص المتحركة
+      strings: ["Lead React Engineer", "Product Builder", "Community Technologist"], // النصوص المتحركة
       loop: true,
       typeSpeed: 100, // سرعة الكتابة
       backSpeed: 80, // سرعة الحذف
@@ -44,7 +44,7 @@ const FeaturedBox = () => {
           <span className="typedText"></span>
         </div>
         <div className="text-info">
-          <p style={{marginTop:'25px'}}>My name is Mays! I'm a web developer</p>
+          <p style={{marginTop:'25px'}}>I design human-centered digital experiences and ship them with precision.</p>
         </div>
         <div className="text-btn">
         <button

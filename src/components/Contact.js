@@ -66,8 +66,8 @@ const Contact = () => {
 
     <section className="section" id="contact">
       <div className="top-header">
-        <h1>Let's Work Together</h1>
-        <span>Do you have a project in your mind? Contact me here</span>
+        <h1>Let's Build Something Exceptional</h1>
+        <span>Whether it’s AI-driven travel or cultural impact platforms, I’d love to collaborate.</span>
       </div>
       <div className="row">
         <div className="col">

@@ -23,11 +23,21 @@ const About = () => {
           <img src="/assets/mays1.jpg" alt="mays image's" className="Profile" />
           <h2>Web developer </h2>
           <p>
-            My name is Mays! I'm a web developer with a passion for creating
-            beautiful and functional websites. I enjoy solving complex problems
-            and working on exciting projects that challenge my skills. In my
-            free time, I love exploring new technologies and enhancing my
-            programming skills.
+            I’m Mays, a product-focused web developer obsessed with crafting
+            seamless experiences that feel as good as they look. Recently, I led
+            the front-end experience for Safar AI—an intelligent travel
+            companion that curates itineraries, surfaces contextual insights, and
+            connects explorers with local experts in real time. The work pushed
+            my React and design systems expertise to new levels while staying
+            laser-focused on accessibility and performance.
+          </p>
+          <p>
+            I’m equally passionate about community impact. At Zaha Cultural
+            Center, I’m building a volunteer engagement platform that helps
+            families discover STEAM workshops, register for events, and track
+            their volunteering milestones. Bridging technology with cultural
+            initiatives keeps me energized and inspired to keep shipping with
+            purpose.
           </p>
         </figcaption>
       </figure>

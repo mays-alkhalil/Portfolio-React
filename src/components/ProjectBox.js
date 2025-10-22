@@ -31,8 +31,8 @@ const Projects = () => {
           style={{ textDecoration: "none" }}
         >
           <i className="uil uil-users-alt"></i>
-          <h3>Completed</h3>
-          <label>3 Finished Projects</label>
+          <h3>Impact Portfolio</h3>
+          <label>10 launches delivered</label>
         </Link>
 
         <Link
@@ -52,7 +52,7 @@ const Projects = () => {
       
           <i className="uil uil-award"></i>
           <h3>Experience</h3>
-          <label>+1 Years in web development</label>
+          <label>Safar AI &amp; Zaha Center</label>
           </Link>
 
         

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import FeaturedBox from './components/FeaturedBox';
@@ -59,11 +59,12 @@ function App() {
   }, []);
 
   return (
-    
     <Router>
-< Navbar />
-        <Routes>
-          <Route path="/" element={
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={
             <>
               <FeaturedBox />
               <About />
@@ -71,13 +72,13 @@ function App() {
               <Contact />
               <Footer />
             </>
-          } />
+          }
+        />
 
-          <Route path="/CompletedProjects" element={<CompletedProjects />} />
-          <Route path="/Experience" element={<Experience />} />
-          <Route path="/Reviews" element={<Reviews />} />
-        </Routes>
-      {/* </div> */}
+        <Route path="/CompletedProjects" element={<CompletedProjects />} />
+        <Route path="/Experience" element={<Experience />} />
+        <Route path="/Reviews" element={<Reviews />} />
+      </Routes>
     </Router>
   );
 }
