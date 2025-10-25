@@ -6,6 +6,39 @@ import './styles/Reviews.css';
 import { Helmet } from 'react-helmet';
 
 const Reviews = () => {
+  const reviews = [
+    { 
+      name: "Haneen Al-Hajaj", 
+      role: "Software Engineer · Safar AI",
+      text: "Mays is an incredibly dedicated developer with a sharp eye for detail. Her creativity and commitment elevate every project she contributes to."
+    },
+    { 
+      name: "Batool Shneikat", 
+      role: "Software Engineer · Safar AI",
+      text: "Collaborating with Mays was an inspiring experience. Her coding discipline, design intuition, and teamwork make her a standout professional."
+    },
+    { 
+      name: "Israa Eid", 
+      role: "Full Stack Developer · Orange Coding Academy",
+      text: "Mays combines technical expertise with artistic sense. She always ensures that every product is both functional and beautifully crafted."
+    },
+    { 
+      name: "Dina Nafez", 
+      role: "Full Stack Developer · Orange Coding Academy",
+      text: "Working with Mays is a joy. Her positivity, problem-solving mindset, and professionalism leave a lasting impression on everyone around her."
+    },
+    { 
+      name: "Mohammad Al Khalil", 
+      role: "Robotics Engineer · N8N Automation Project",
+      text: "Mays has an impressive ability to bridge creativity with automation. Her innovative approach consistently improves workflow efficiency and project outcomes."
+    },
+    { 
+      name: "Musab Al Zoubi", 
+      role: "Project Coordinator · Zaha Cultural Center",
+      text: "Mays is a highly skilled and reliable developer who brings both professionalism and enthusiasm to every collaboration."
+    }
+  ];
+
   return (
     <div>
       <Helmet>
@@ -16,7 +49,7 @@ const Reviews = () => {
         />
         <meta
           name="keywords"
-          content="Testimonials, Feedback, Mays Al Khalil, Web Development, React, JavaScript, Frontend, UI/UX, Safar AI, Zaha Center, Professional Reviews"
+          content="Testimonials, Feedback, Mays Al Khalil, Web Development, React, JavaScript, Frontend, UI/UX, Safar AI, Orange Coding Academy, N8N Automation, Zaha Center, Professional Reviews"
         />
       </Helmet>
 
@@ -27,35 +60,8 @@ const Reviews = () => {
         </div>
 
         <div className="reviews-container">
-          {[
-            { 
-              name: "Rahaf Al-Zoubi", 
-              role: "Programming Instructor · Orange Academy",
-              text: "Mays stood out among her peers for her strong technical foundation and creativity. She brings energy, precision, and a deep sense of responsibility to every project she works on."
-            },
-            { 
-              name: "Dr. Ahmad Khalil", 
-              role: "Academic Supervisor · Al-Balqa Applied University",
-              text: "Mays demonstrates exceptional problem-solving abilities and a remarkable drive to learn. Her analytical mindset and collaborative spirit make her a true asset to any development team."
-            },
-            { 
-              name: "Sara Al-Majali", 
-              role: "Project Manager · Zaha Cultural Center",
-              text: "Working with Mays on the volunteering platform was a great experience. Her focus on usability and her clean, efficient code helped us launch a smooth and engaging system for families and volunteers."
-            },
-            { 
-              name: "Mohammad Al-Ajarmeh", 
-              role: "Founder · Safar AI",
-              text: "Mays played a vital role in shaping the front-end architecture of Safar AI. Her leadership, attention to detail, and ability to translate complex ideas into intuitive design made a huge difference."
-            }
-          ].map((review, index) => (
+          {reviews.map((review, index) => (
             <div key={index} className="review-card">
-              <div className="img-box">
-                <img 
-                  src={`https://via.placeholder.com/100?text=${review.name.charAt(0)}`} 
-                  alt={review.name} 
-                />
-              </div>
               <div className="review-content">
                 <h3>{review.name}</h3>
                 <span className="review-role">{review.role}</span>

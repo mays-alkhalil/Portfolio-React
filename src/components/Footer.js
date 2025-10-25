@@ -25,7 +25,7 @@ const Footer = () => {
       {/* Footer Social Icons */}
       <div className="FOOTER-SOCIAL-ICONS">
         <a
-          href="https://www.instagram.com/mays.alkhalil2002?igsh=enp3cGVqbnl5NW5m"
+          href="https://www.instagram.com/codingwithmays/"
           target="_blank"
           rel="noopener noreferrer"
           className="icon"
