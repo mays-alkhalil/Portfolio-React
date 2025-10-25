@@ -19,15 +19,17 @@ body.dark {
 
 .experience-section {
   padding: 80px 10%;
-  background: #f9f9fb;
+  background: var(--section-background);
   min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+  color: var(--text-color);
 }
 
 .section-title {
   text-align: center;
   font-size: 2.4rem;
   font-weight: 700;
-  color: #4b21b3;
+  color: var(--heading-color);
   margin-bottom: 70px;
   position: relative;
 }
@@ -36,7 +38,7 @@ body.dark {
   content: "";
   width: 80px;
   height: 4px;
-  background-color: #5c2dd5;
+  background-color: var(--accent-color-strong);
   display: block;
   margin: 12px auto 0;
   border-radius: 2px;
@@ -52,17 +54,19 @@ body.dark {
 }
 
 .experience-card {
-  background: #fff;
+  background: var(--card-background);
   border-radius: 14px;
   padding: 40px 45px;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--card-border-color);
+  box-shadow: 0 4px 25px var(--card-shadow-color);
   position: relative;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
+  color: var(--text-color);
 }
 
 .experience-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 35px var(--card-shadow-hover-color);
 }
 
 .experience-card::before {
@@ -72,13 +76,13 @@ body.dark {
   top: 0;
   width: 5px;
   height: 100%;
-  background: linear-gradient(180deg, #5c2dd5, #8749f2);
+  background: linear-gradient(180deg, var(--accent-color-strong), var(--accent-color));
   border-top-left-radius: 14px;
   border-bottom-left-radius: 14px;
 }
 
 .experience-card h3 {
-  color: #2a2a2a;
+  color: var(--text-color);
   margin-bottom: 10px;
   font-size: 1.4rem;
   font-weight: 600;
@@ -86,8 +90,8 @@ body.dark {
 
 .exp-duration {
   display: inline-block;
-  background-color: #efeaff;
-  color: #5c2dd5;
+  background-color: var(--badge-background);
+  color: var(--badge-text);
   font-weight: 500;
   font-size: 0.9rem;
   padding: 4px 12px;
@@ -96,14 +100,14 @@ body.dark {
 }
 
 .experience-card p {
-  color: #333;
+  color: var(--text-muted);
   line-height: 1.7;
   font-size: 1rem;
   text-align: justify;
 }
 
 strong {
-  color: #4b21b3;
+  color: var(--accent-color-strong);
 }
 
 /* Add a vertical timeline line */
@@ -114,7 +118,7 @@ strong {
   top: 0;
   width: 3px;
   height: 100%;
-  background: linear-gradient(180deg, #e0d7ff, #fff);
+  background: var(--timeline-gradient);
   border-radius: 3px;
   z-index: 0;
 }

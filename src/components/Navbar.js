@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/style.css';
 import { Link } from 'react-router-dom'; // استيراد Link من react-router-dom
 
 const Navbar = ({ activeLink }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+    return window.localStorage.getItem('theme') === 'dark';
+  });
 
   const toggleMenu = () => {
     setIsMenuOpen(prevState => !prevState);
   };
 
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    const theme = isDarkMode ? 'dark' : 'light';
+    document.body.classList.toggle('dark', isDarkMode);
+    document.documentElement.setAttribute('data-theme', theme);
+    window.localStorage.setItem('theme', theme);
+  }, [isDarkMode]);
+
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.body.classList.toggle('dark', !isDarkMode);
+    setIsDarkMode((prevMode) => !prevMode);
   };
 
   return (

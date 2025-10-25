@@ -17,14 +17,16 @@ body {
 
 .reviews-section {
     padding-block: 5em;
-    background: #f0f4f8;
+    background: var(--section-background);
+    transition: background 0.3s ease, color 0.3s ease;
+    color: var(--text-color);
 }
 
 .top-header h1 {
     text-align: center;
     font-size: 36px;
     font-weight: 700;
-    color: #333;
+    color: var(--heading-color);
     margin: 2em;
     position: relative;
 }
@@ -52,22 +54,24 @@ body {
 /* .review-card: تنسيق البطاقات */
 .review-card {
     position: relative;
-    background: white;
+    background: var(--card-background);
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--card-border-color);
+    box-shadow: 0 10px 30px var(--card-shadow-color);
     overflow: hidden;
     transition: transform 0.5s ease, box-shadow 0.5s ease;
     display: flex;
     gap: 20px;
     width: 90%; /* ملء العرض الكامل */
+    color: var(--text-color);
     /* margin:10px 30px; */
 }
 
 /* .review-card:hover: تأثير عند التمرير */
 .review-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px var(--card-shadow-hover-color);
 }
 
 /* .img-box: تنسيق الصورة داخل البطاقة */
@@ -96,14 +100,22 @@ body {
 .review-content h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #8749f2;
+    color: var(--accent-color);
     margin-bottom: 10px;
+}
+
+.review-role {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-style: italic;
 }
 
 /* نص المراجعة */
 .review-content p {
     font-size: 16px;
-    color: #555;
+    color: var(--text-muted);
     line-height: 1.6;
     font-style: italic;
 }
@@ -154,9 +166,9 @@ body {
     .review-role {
   display: block;
   font-size: 0.9rem;
-  color: #777;
+  color: var(--text-muted);
   margin-bottom: 8px;
   font-style: italic;
-}
+ }
 
 }

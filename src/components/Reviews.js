@@ -53,6 +53,8 @@ const Reviews = () => {
         />
       </Helmet>
 
+      <Navbar />
+
       <section className="reviews-section" id="reviews">
         <div className="top-header">
           <h1>What People Say</h1>
