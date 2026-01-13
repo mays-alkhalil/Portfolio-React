@@ -72,12 +72,6 @@ const Navbar = ({ activeLink }) => {
             </a>
             <div className="circle"></div>
           </li>
-          <li className="nav_list">
-            <Link to="/dashboard" className="nav-link">
-              لوحة التحكم
-            </Link>
-            <div className="circle"></div>
-          </li>
         </ul>
       </div>
 

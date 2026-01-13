@@ -24,6 +24,12 @@
   align-self: flex-start;
 }
 
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .dashboard-section {
   margin-bottom: 48px;
   padding: 24px;

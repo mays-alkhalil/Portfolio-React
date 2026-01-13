@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useContent } from "../content/ContentContext";
+import { logout } from "../content/auth";
 import "./styles/Dashboard.css";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { content, updateContent, resetContent } = useContent();
 
   const updateArrayItem = (path, index, field, value) => {
@@ -43,9 +46,20 @@ const Dashboard = () => {
             عدّل كل أقسام الموقع مباشرة واحفظ البيانات في المتصفح بدون تعقيد.
           </p>
         </div>
-        <button className="btn dashboard-reset" onClick={resetContent}>
-          استعادة الإعدادات الافتراضية
-        </button>
+        <div className="dashboard-actions">
+          <button className="btn dashboard-reset" onClick={resetContent}>
+            استعادة الإعدادات الافتراضية
+          </button>
+          <button
+            className="btn btn-light"
+            onClick={() => {
+              logout();
+              navigate("/dashboard/login");
+            }}
+          >
+            تسجيل الخروج
+          </button>
+        </div>
       </section>
 
       <section className="dashboard-section">

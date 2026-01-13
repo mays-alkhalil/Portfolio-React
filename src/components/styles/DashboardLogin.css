@@ -1,0 +1,50 @@
+.dashboard-login-page {
+  padding: 140px 8% 80px;
+  background: var(--body-color, #f6f6f6);
+  color: var(--text-color, #1f1f1f);
+  min-height: 100vh;
+}
+
+.dashboard-login-card {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.dashboard-login-card h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.dashboard-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-login-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.dashboard-login-form input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d8d8d8;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.dashboard-login-error {
+  margin: 0;
+  color: #d64545;
+  font-weight: 600;
+}

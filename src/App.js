@@ -10,6 +10,8 @@ import CompletedProjects from "./components/CompletedProjects";
 import Experience from "./components/Experience";
 import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
+import DashboardGate from "./components/DashboardGate";
+import DashboardLogin from "./components/DashboardLogin";
 import "./components/styles/style.css";
 import ScrollReveal from "scrollreveal";
 
@@ -79,7 +81,15 @@ function App() {
         <Route path="/CompletedProjects" element={<CompletedProjects />} />
         <Route path="/Experience" element={<Experience />} />
         <Route path="/Reviews" element={<Reviews />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/login" element={<DashboardLogin />} />
+        <Route
+          path="/dashboard"
+          element={
+            <DashboardGate>
+              <Dashboard />
+            </DashboardGate>
+          }
+        />
       </Routes>
     </Router>
   );
