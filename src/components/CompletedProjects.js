@@ -6,8 +6,8 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const CompletedProjects = () => {
-  const { content } = useContent();
-  const { completedProjects } = content;
+  const { content, getLocalized } = useContent();
+  const { completedProjects, sectionStyles } = content;
 
   return (
     <div>
@@ -25,25 +25,33 @@ const CompletedProjects = () => {
 
       <Navbar />
 
-      <section className="projects-section">
-        <h1 className="section-title">{completedProjects.title}</h1>
+      <section
+        className="projects-section"
+        style={{
+          "--text-color": sectionStyles.completedProjects.text,
+          "--body-color": sectionStyles.completedProjects.background,
+          backgroundColor: sectionStyles.completedProjects.background,
+          color: sectionStyles.completedProjects.text,
+        }}
+      >
+        <h1 className="section-title">{getLocalized(completedProjects.title)}</h1>
 
         <div className="projects-container">
           {completedProjects.items.map((project) => (
-            <div className="project-card" key={project.title}>
+            <div className="project-card" key={getLocalized(project.title)}>
               <div className="card-front">
-                <h2>{project.title}</h2>
+                <h2>{getLocalized(project.title)}</h2>
               </div>
               <div className="card-back">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
+                <h3>{getLocalized(project.title)}</h3>
+                <p>{getLocalized(project.description)}</p>
                 <a
                   href={project.link}
                   className="btn"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {project.cta}
+                  {getLocalized(project.cta)}
                 </a>
               </div>
             </div>

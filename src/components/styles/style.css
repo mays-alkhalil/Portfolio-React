@@ -517,8 +517,44 @@ cursor: pointer;
     border-radius: 50%;
     position: relative; 
     margin: 0 auto; /* لجعل الصورة في المنتصف */
-    max-width: 90px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.profile-responsive{
+    width: var(--profile-size-desktop, 220px);
+    height: var(--profile-size-desktop, 220px);
+    object-fit: cover;
+}
+
+@media (max-width: 1024px){
+    .profile-responsive{
+        width: var(--profile-size-tablet, 180px);
+        height: var(--profile-size-tablet, 180px);
+    }
+}
+
+@media (max-width: 768px){
+    .profile-responsive{
+        width: var(--profile-size-mobile, 140px);
+        height: var(--profile-size-mobile, 140px);
+    }
+}
+
+.lang-toggle{
+    margin-inline-start: 12px;
+    border: 1px solid var(--card-border-color);
+    background: transparent;
+    color: var(--text-color);
+    border-radius: 20px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.lang-toggle:hover{
+    background: var(--first-color);
+    color: #fff;
 }
 
 .about-me h2{
@@ -763,7 +799,6 @@ footer{
     align-items: center;
     flex-direction: column;
     row-gap: 30px;
-    background: var(--body-color);
     padding-block: 40px 60px;
 
 }
@@ -780,7 +815,7 @@ display: flex;
 
 .footer_menu_list a{
 text-decoration: none;
-color: var(--text-color);
+color: inherit;
 font-weight: 500;
 margin-inline: 20px;
 
@@ -801,7 +836,7 @@ margin-inline: 20px;
 .bottom-footer{
     font-size: 14px;
     margin-top: 10px;
-    color: var(--color-white);
+    color: inherit;
 }
 
 /* media query= 1024px */
@@ -1093,4 +1128,3 @@ body.dark .footer_menu_list a {
     visibility: visible;
   }
   
-

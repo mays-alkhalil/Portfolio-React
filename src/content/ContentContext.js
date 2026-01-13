@@ -1,8 +1,20 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import defaultContent from "./defaultContent";
 
 const ContentContext = createContext(null);
 const STORAGE_KEY = "portfolioContent";
+const LANGUAGE_KEY = "portfolioLanguage";
+const DEFAULT_LANGUAGE = "ar";
+
+const isLocalizedObject = (value) =>
+  value && typeof value === "object" && ("ar" in value || "en" in value);
 
 const mergeDeep = (target, source) => {
   if (typeof source !== "object" || source === null) {
@@ -40,6 +52,12 @@ const cloneContent = (value) => {
 };
 
 export const ContentProvider = ({ children }) => {
+  const [language, setLanguage] = useState(() => {
+    if (typeof window === "undefined") {
+      return DEFAULT_LANGUAGE;
+    }
+    return window.localStorage.getItem(LANGUAGE_KEY) || DEFAULT_LANGUAGE;
+  });
   const [content, setContent] = useState(() => {
     if (typeof window === "undefined") {
       return defaultContent;
@@ -65,6 +83,15 @@ export const ContentProvider = ({ children }) => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
   }, [content]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    window.localStorage.setItem(LANGUAGE_KEY, language);
+    document.documentElement.setAttribute("lang", language);
+    document.documentElement.setAttribute("dir", language === "ar" ? "rtl" : "ltr");
+  }, [language]);
+
   const updateContent = (path, value) => {
     setContent((prev) => {
       const next = cloneContent(prev);
@@ -86,14 +113,32 @@ export const ContentProvider = ({ children }) => {
     setContent(defaultContent);
   };
 
+  const toggleLanguage = useCallback(() => {
+    setLanguage((prev) => (prev === "ar" ? "en" : "ar"));
+  }, []);
+
+  const getLocalized = useCallback(
+    (value) => {
+      if (!isLocalizedObject(value)) {
+        return value;
+      }
+      return value[language] ?? value.en ?? value.ar ?? "";
+    },
+    [language]
+  );
+
   const value = useMemo(
     () => ({
       content,
       setContent,
       updateContent,
       resetContent,
+      language,
+      setLanguage,
+      toggleLanguage,
+      getLocalized,
     }),
-    [content]
+    [content, language, getLocalized, toggleLanguage]
   );
 
   return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>;

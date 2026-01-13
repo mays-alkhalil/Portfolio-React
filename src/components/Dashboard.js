@@ -19,17 +19,53 @@ const Dashboard = () => {
     reader.readAsDataURL(file);
   };
 
+  const getLocalizedValue = (value, lang) => {
+    if (typeof value === "string") {
+      return value;
+    }
+    if (!value || typeof value !== "object") {
+      return "";
+    }
+    return value[lang] ?? "";
+  };
+
+  const updateLocalizedValue = (path, lang, value) => {
+    updateContent([...path, lang], value);
+  };
+
+  const updateArrayItemLocalized = (path, index, field, lang, value) => {
+    const current = path.reduce((acc, key) => acc[key], content);
+    const next = [...current];
+    const currentField =
+      typeof next[index][field] === "object" && next[index][field] !== null
+        ? next[index][field]
+        : {};
+    next[index] = {
+      ...next[index],
+      [field]: {
+        ...currentField,
+        [lang]: value,
+      },
+    };
+    updateContent(path, next);
+  };
+
+  const updateArrayValueLocalized = (path, index, lang, value) => {
+    const current = path.reduce((acc, key) => acc[key], content);
+    const next = [...current];
+    const currentValue =
+      typeof next[index] === "object" && next[index] !== null ? next[index] : {};
+    next[index] = {
+      ...currentValue,
+      [lang]: value,
+    };
+    updateContent(path, next);
+  };
+
   const updateArrayItem = (path, index, field, value) => {
     const current = path.reduce((acc, key) => acc[key], content);
     const next = [...current];
     next[index] = { ...next[index], [field]: value };
-    updateContent(path, next);
-  };
-
-  const updateArrayValue = (path, index, value) => {
-    const current = path.reduce((acc, key) => acc[key], content);
-    const next = [...current];
-    next[index] = value;
     updateContent(path, next);
   };
 
@@ -72,40 +108,283 @@ const Dashboard = () => {
       </section>
 
       <section className="dashboard-section">
-        <h2>البطل الرئيسي</h2>
+        <h2>ألوان الأقسام</h2>
         <div className="dashboard-grid">
           <label>
-            جملة الترحيب
+            خلفية البطل الرئيسي
             <input
-              type="text"
-              value={content.featured.greeting}
-              onChange={(event) =>
-                updateContent(["featured", "greeting"], event.target.value)
-              }
-            />
-          </label>
-          <label>
-            نص المقدمة
-            <textarea
-              value={content.featured.introText}
-              onChange={(event) =>
-                updateContent(["featured", "introText"], event.target.value)
-              }
-            />
-          </label>
-          <label>
-            زر التوظيف
-            <input
-              type="text"
-              value={content.featured.hireButtonLabel}
+              type="color"
+              value={content.sectionStyles.featured.background}
               onChange={(event) =>
                 updateContent(
-                  ["featured", "hireButtonLabel"],
+                  ["sectionStyles", "featured", "background"],
                   event.target.value
                 )
               }
             />
           </label>
+          <label>
+            نص البطل الرئيسي
+            <input
+              type="color"
+              value={content.sectionStyles.featured.text}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStyles", "featured", "text"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            خلفية قسم من أنا
+            <input
+              type="color"
+              value={content.sectionStyles.about.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStyles", "about", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص قسم من أنا
+            <input
+              type="color"
+              value={content.sectionStyles.about.text}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStyles", "about", "text"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            خلفية المشاريع
+            <input
+              type="color"
+              value={content.sectionStyles.projects.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStyles", "projects", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص المشاريع
+            <input
+              type="color"
+              value={content.sectionStyles.projects.text}
+              onChange={(event) =>
+                updateContent(["sectionStyles", "projects", "text"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            خلفية التواصل
+            <input
+              type="color"
+              value={content.sectionStyles.contact.background}
+              onChange={(event) =>
+                updateContent(["sectionStyles", "contact", "background"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            نص التواصل
+            <input
+              type="color"
+              value={content.sectionStyles.contact.text}
+              onChange={(event) =>
+                updateContent(["sectionStyles", "contact", "text"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            خلفية التوصيات
+            <input
+              type="color"
+              value={content.sectionStyles.reviews.background}
+              onChange={(event) =>
+                updateContent(["sectionStyles", "reviews", "background"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            نص التوصيات
+            <input
+              type="color"
+              value={content.sectionStyles.reviews.text}
+              onChange={(event) =>
+                updateContent(["sectionStyles", "reviews", "text"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            خلفية الخبرات
+            <input
+              type="color"
+              value={content.sectionStyles.experience.background}
+              onChange={(event) =>
+                updateContent(["sectionStyles", "experience", "background"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            نص الخبرات
+            <input
+              type="color"
+              value={content.sectionStyles.experience.text}
+              onChange={(event) =>
+                updateContent(["sectionStyles", "experience", "text"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            خلفية المشاريع المكتملة
+            <input
+              type="color"
+              value={content.sectionStyles.completedProjects.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStyles", "completedProjects", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص المشاريع المكتملة
+            <input
+              type="color"
+              value={content.sectionStyles.completedProjects.text}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStyles", "completedProjects", "text"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            خلفية الفوتر
+            <input
+              type="color"
+              value={content.sectionStyles.footer.background}
+              onChange={(event) =>
+                updateContent(["sectionStyles", "footer", "background"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            نص الفوتر
+            <input
+              type="color"
+              value={content.sectionStyles.footer.text}
+              onChange={(event) =>
+                updateContent(["sectionStyles", "footer", "text"], event.target.value)
+              }
+            />
+          </label>
+        </div>
+      </section>
+
+      <section className="dashboard-section">
+        <h2>البطل الرئيسي</h2>
+        <div className="dashboard-grid">
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              جملة الترحيب (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.featured.greeting, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "greeting"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Greeting (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.featured.greeting, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "greeting"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              نص المقدمة (عربي)
+              <textarea
+                value={getLocalizedValue(content.featured.introText, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "introText"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Intro text (English)
+              <textarea
+                value={getLocalizedValue(content.featured.introText, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "introText"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              زر التوظيف (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.featured.hireButtonLabel, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "hireButtonLabel"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Hire button (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.featured.hireButtonLabel, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "hireButtonLabel"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
           <label>
             هدف زر التوظيف (ID)
             <input
@@ -145,16 +424,36 @@ const Dashboard = () => {
               }
             />
           </label>
-          <label>
-            عنوان السيرة الذاتية
-            <input
-              type="text"
-              value={content.featured.cv.label}
-              onChange={(event) =>
-                updateContent(["featured", "cv", "label"], event.target.value)
-              }
-            />
-          </label>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              عنوان السيرة الذاتية (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.featured.cv.label, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "cv", "label"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              CV label (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.featured.cv.label, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "cv", "label"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
           <label>
             اسم الملف
             <input
@@ -190,13 +489,72 @@ const Dashboard = () => {
               }
             />
           </label>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              وصف الصورة (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.featured.image.alt, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "image", "alt"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Image alt (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.featured.image.alt, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["featured", "image", "alt"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
           <label>
-            وصف الصورة
+            حجم صورة البروفايل - لابتوب (px)
             <input
-              type="text"
-              value={content.featured.image.alt}
+              type="number"
+              value={content.featured.image.sizes.desktop}
               onChange={(event) =>
-                updateContent(["featured", "image", "alt"], event.target.value)
+                updateContent(
+                  ["featured", "image", "sizes", "desktop"],
+                  Number(event.target.value)
+                )
+              }
+            />
+          </label>
+          <label>
+            حجم صورة البروفايل - تابلت (px)
+            <input
+              type="number"
+              value={content.featured.image.sizes.tablet}
+              onChange={(event) =>
+                updateContent(
+                  ["featured", "image", "sizes", "tablet"],
+                  Number(event.target.value)
+                )
+              }
+            />
+          </label>
+          <label>
+            حجم صورة البروفايل - موبايل (px)
+            <input
+              type="number"
+              value={content.featured.image.sizes.mobile}
+              onChange={(event) =>
+                updateContent(
+                  ["featured", "image", "sizes", "mobile"],
+                  Number(event.target.value)
+                )
               }
             />
           </label>
@@ -208,9 +566,28 @@ const Dashboard = () => {
             <div key={`role-${index}`} className="dashboard-row">
               <input
                 type="text"
-                value={role}
+                value={getLocalizedValue(role, "ar")}
+                placeholder="عربي"
                 onChange={(event) =>
-                  updateArrayValue(["featured", "typedRoles"], index, event.target.value)
+                  updateArrayValueLocalized(
+                    ["featured", "typedRoles"],
+                    index,
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+              <input
+                type="text"
+                value={getLocalizedValue(role, "en")}
+                placeholder="English"
+                onChange={(event) =>
+                  updateArrayValueLocalized(
+                    ["featured", "typedRoles"],
+                    index,
+                    "en",
+                    event.target.value
+                  )
                 }
               />
               <button
@@ -226,7 +603,10 @@ const Dashboard = () => {
             type="button"
             className="btn"
             onClick={() =>
-              addArrayItem(["featured", "typedRoles"], "عنوان جديد")
+              addArrayItem(["featured", "typedRoles"], {
+                ar: "عنوان جديد",
+                en: "New title",
+              })
             }
           >
             إضافة مسمى
@@ -286,36 +666,80 @@ const Dashboard = () => {
       <section className="dashboard-section">
         <h2>قسم من أنا</h2>
         <div className="dashboard-grid">
-          <label>
-            العنوان
-            <input
-              type="text"
-              value={content.about.title}
-              onChange={(event) =>
-                updateContent(["about", "title"], event.target.value)
-              }
-            />
-          </label>
-          <label>
-            العنوان الفرعي
-            <input
-              type="text"
-              value={content.about.subtitle}
-              onChange={(event) =>
-                updateContent(["about", "subtitle"], event.target.value)
-              }
-            />
-          </label>
-          <label>
-            العنوان الوظيفي
-            <input
-              type="text"
-              value={content.about.roleHeadline}
-              onChange={(event) =>
-                updateContent(["about", "roleHeadline"], event.target.value)
-              }
-            />
-          </label>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              العنوان (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.about.title, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(["about", "title"], "ar", event.target.value)
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Title (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.about.title, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(["about", "title"], "en", event.target.value)
+                }
+              />
+            </label>
+          </div>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              العنوان الفرعي (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.about.subtitle, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(["about", "subtitle"], "ar", event.target.value)
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Subtitle (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.about.subtitle, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(["about", "subtitle"], "en", event.target.value)
+                }
+              />
+            </label>
+          </div>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              العنوان الوظيفي (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.about.roleHeadline, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["about", "roleHeadline"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Role headline (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.about.roleHeadline, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["about", "roleHeadline"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
           <label>
             صورة القسم
             <input
@@ -338,13 +762,72 @@ const Dashboard = () => {
               }
             />
           </label>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              وصف الصورة (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.about.image.alt, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["about", "image", "alt"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Image alt (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.about.image.alt, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["about", "image", "alt"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
           <label>
-            وصف الصورة
+            حجم صورة من أنا - لابتوب (px)
             <input
-              type="text"
-              value={content.about.image.alt}
+              type="number"
+              value={content.about.image.sizes.desktop}
               onChange={(event) =>
-                updateContent(["about", "image", "alt"], event.target.value)
+                updateContent(
+                  ["about", "image", "sizes", "desktop"],
+                  Number(event.target.value)
+                )
+              }
+            />
+          </label>
+          <label>
+            حجم صورة من أنا - تابلت (px)
+            <input
+              type="number"
+              value={content.about.image.sizes.tablet}
+              onChange={(event) =>
+                updateContent(
+                  ["about", "image", "sizes", "tablet"],
+                  Number(event.target.value)
+                )
+              }
+            />
+          </label>
+          <label>
+            حجم صورة من أنا - موبايل (px)
+            <input
+              type="number"
+              value={content.about.image.sizes.mobile}
+              onChange={(event) =>
+                updateContent(
+                  ["about", "image", "sizes", "mobile"],
+                  Number(event.target.value)
+                )
               }
             />
           </label>
@@ -355,9 +838,27 @@ const Dashboard = () => {
           {content.about.paragraphs.map((paragraph, index) => (
             <div key={`about-paragraph-${index}`} className="dashboard-row">
               <textarea
-                value={paragraph}
+                value={getLocalizedValue(paragraph, "ar")}
+                placeholder="عربي"
                 onChange={(event) =>
-                  updateArrayValue(["about", "paragraphs"], index, event.target.value)
+                  updateArrayValueLocalized(
+                    ["about", "paragraphs"],
+                    index,
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+              <textarea
+                value={getLocalizedValue(paragraph, "en")}
+                placeholder="English"
+                onChange={(event) =>
+                  updateArrayValueLocalized(
+                    ["about", "paragraphs"],
+                    index,
+                    "en",
+                    event.target.value
+                  )
                 }
               />
               <button
@@ -373,7 +874,10 @@ const Dashboard = () => {
             type="button"
             className="btn"
             onClick={() =>
-              addArrayItem(["about", "paragraphs"], "فقرة جديدة")
+              addArrayItem(["about", "paragraphs"], {
+                ar: "فقرة جديدة",
+                en: "New paragraph",
+              })
             }
           >
             إضافة فقرة
@@ -383,49 +887,107 @@ const Dashboard = () => {
 
       <section className="dashboard-section">
         <h2>روابط المشاريع</h2>
-        <label>
-          عنوان القسم
-          <input
-            type="text"
-            value={content.projects.title}
-            onChange={(event) =>
-              updateContent(["projects", "title"], event.target.value)
-            }
-          />
-        </label>
+        <div className="dashboard-lang-row">
+          <label className="dashboard-lang-field">
+            عنوان القسم (عربي)
+            <input
+              type="text"
+              value={getLocalizedValue(content.projects.title, "ar")}
+              onChange={(event) =>
+                updateLocalizedValue(
+                  ["projects", "title"],
+                  "ar",
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label className="dashboard-lang-field">
+            Section title (English)
+            <input
+              type="text"
+              value={getLocalizedValue(content.projects.title, "en")}
+              onChange={(event) =>
+                updateLocalizedValue(
+                  ["projects", "title"],
+                  "en",
+                  event.target.value
+                )
+              }
+            />
+          </label>
+        </div>
         <div className="dashboard-list">
           {content.projects.cards.map((card, index) => (
             <div key={`project-card-${index}`} className="dashboard-card">
-              <label>
-                العنوان
-                <input
-                  type="text"
-                  value={card.title}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["projects", "cards"],
-                      index,
-                      "title",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
-              <label>
-                الوصف القصير
-                <input
-                  type="text"
-                  value={card.label}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["projects", "cards"],
-                      index,
-                      "label",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  العنوان (عربي)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(card.title, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["projects", "cards"],
+                        index,
+                        "title",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  Title (English)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(card.title, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["projects", "cards"],
+                        index,
+                        "title",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  الوصف القصير (عربي)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(card.label, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["projects", "cards"],
+                        index,
+                        "label",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  Label (English)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(card.label, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["projects", "cards"],
+                        index,
+                        "label",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
               <label>
                 أيقونة (Class)
                 <input
@@ -470,8 +1032,8 @@ const Dashboard = () => {
             className="btn"
             onClick={() =>
               addArrayItem(["projects", "cards"], {
-                title: "بطاقة جديدة",
-                label: "وصف مختصر",
+                title: { ar: "بطاقة جديدة", en: "New card" },
+                label: { ar: "وصف مختصر", en: "Short label" },
                 iconClass: "uil uil-star",
                 link: "/",
               })
@@ -485,26 +1047,66 @@ const Dashboard = () => {
       <section className="dashboard-section">
         <h2>قسم التواصل</h2>
         <div className="dashboard-grid">
-          <label>
-            العنوان
-            <input
-              type="text"
-              value={content.contact.title}
-              onChange={(event) =>
-                updateContent(["contact", "title"], event.target.value)
-              }
-            />
-          </label>
-          <label>
-            العنوان الفرعي
-            <input
-              type="text"
-              value={content.contact.subtitle}
-              onChange={(event) =>
-                updateContent(["contact", "subtitle"], event.target.value)
-              }
-            />
-          </label>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              العنوان (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.contact.title, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["contact", "title"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Title (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.contact.title, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["contact", "title"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              العنوان الفرعي (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.contact.subtitle, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["contact", "subtitle"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Subtitle (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.contact.subtitle, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["contact", "subtitle"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
           <label>
             البريد الإلكتروني
             <input
@@ -530,34 +1132,73 @@ const Dashboard = () => {
 
       <section className="dashboard-section">
         <h2>التجارب المهنية</h2>
-        <label>
-          عنوان القسم
-          <input
-            type="text"
-            value={content.experience.title}
-            onChange={(event) =>
-              updateContent(["experience", "title"], event.target.value)
-            }
-          />
-        </label>
+        <div className="dashboard-lang-row">
+          <label className="dashboard-lang-field">
+            عنوان القسم (عربي)
+            <input
+              type="text"
+              value={getLocalizedValue(content.experience.title, "ar")}
+              onChange={(event) =>
+                updateLocalizedValue(
+                  ["experience", "title"],
+                  "ar",
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label className="dashboard-lang-field">
+            Section title (English)
+            <input
+              type="text"
+              value={getLocalizedValue(content.experience.title, "en")}
+              onChange={(event) =>
+                updateLocalizedValue(
+                  ["experience", "title"],
+                  "en",
+                  event.target.value
+                )
+              }
+            />
+          </label>
+        </div>
         <div className="dashboard-list">
           {content.experience.items.map((item, index) => (
             <div key={`experience-${index}`} className="dashboard-card">
-              <label>
-                المسمى الوظيفي
-                <input
-                  type="text"
-                  value={item.role}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["experience", "items"],
-                      index,
-                      "role",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  المسمى الوظيفي (عربي)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.role, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["experience", "items"],
+                        index,
+                        "role",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  Role (English)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.role, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["experience", "items"],
+                        index,
+                        "role",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
               <label>
                 المدة الزمنية
                 <input
@@ -573,20 +1214,38 @@ const Dashboard = () => {
                   }
                 />
               </label>
-              <label>
-                الوصف
-                <textarea
-                  value={item.description}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["experience", "items"],
-                      index,
-                      "description",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  الوصف (عربي)
+                  <textarea
+                    value={getLocalizedValue(item.description, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["experience", "items"],
+                        index,
+                        "description",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  Description (English)
+                  <textarea
+                    value={getLocalizedValue(item.description, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["experience", "items"],
+                        index,
+                        "description",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
               <button
                 type="button"
                 className="btn btn-light"
@@ -601,9 +1260,9 @@ const Dashboard = () => {
             className="btn"
             onClick={() =>
               addArrayItem(["experience", "items"], {
-                role: "خبرة جديدة",
+                role: { ar: "خبرة جديدة", en: "New role" },
                 duration: "الفترة الزمنية",
-                description: "تفاصيل الخبرة",
+                description: { ar: "تفاصيل الخبرة", en: "Experience details" },
               })
             }
           >
@@ -614,48 +1273,105 @@ const Dashboard = () => {
 
       <section className="dashboard-section">
         <h2>المشاريع المكتملة</h2>
-        <label>
-          عنوان القسم
-          <input
-            type="text"
-            value={content.completedProjects.title}
-            onChange={(event) =>
-              updateContent(["completedProjects", "title"], event.target.value)
-            }
-          />
-        </label>
+        <div className="dashboard-lang-row">
+          <label className="dashboard-lang-field">
+            عنوان القسم (عربي)
+            <input
+              type="text"
+              value={getLocalizedValue(content.completedProjects.title, "ar")}
+              onChange={(event) =>
+                updateLocalizedValue(
+                  ["completedProjects", "title"],
+                  "ar",
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label className="dashboard-lang-field">
+            Section title (English)
+            <input
+              type="text"
+              value={getLocalizedValue(content.completedProjects.title, "en")}
+              onChange={(event) =>
+                updateLocalizedValue(
+                  ["completedProjects", "title"],
+                  "en",
+                  event.target.value
+                )
+              }
+            />
+          </label>
+        </div>
         <div className="dashboard-list">
           {content.completedProjects.items.map((item, index) => (
             <div key={`completed-project-${index}`} className="dashboard-card">
-              <label>
-                العنوان
-                <input
-                  type="text"
-                  value={item.title}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["completedProjects", "items"],
-                      index,
-                      "title",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
-              <label>
-                الوصف
-                <textarea
-                  value={item.description}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["completedProjects", "items"],
-                      index,
-                      "description",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  العنوان (عربي)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.title, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["completedProjects", "items"],
+                        index,
+                        "title",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  Title (English)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.title, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["completedProjects", "items"],
+                        index,
+                        "title",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  الوصف (عربي)
+                  <textarea
+                    value={getLocalizedValue(item.description, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["completedProjects", "items"],
+                        index,
+                        "description",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  Description (English)
+                  <textarea
+                    value={getLocalizedValue(item.description, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["completedProjects", "items"],
+                        index,
+                        "description",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
               <label>
                 رابط المشروع
                 <input
@@ -671,21 +1387,40 @@ const Dashboard = () => {
                   }
                 />
               </label>
-              <label>
-                نص الزر
-                <input
-                  type="text"
-                  value={item.cta}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["completedProjects", "items"],
-                      index,
-                      "cta",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  نص الزر (عربي)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.cta, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["completedProjects", "items"],
+                        index,
+                        "cta",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  CTA (English)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.cta, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["completedProjects", "items"],
+                        index,
+                        "cta",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
               <button
                 type="button"
                 className="btn btn-light"
@@ -702,10 +1437,13 @@ const Dashboard = () => {
             className="btn"
             onClick={() =>
               addArrayItem(["completedProjects", "items"], {
-                title: "مشروع جديد",
-                description: "وصف مختصر للمشروع",
+                title: { ar: "مشروع جديد", en: "New project" },
+                description: {
+                  ar: "وصف مختصر للمشروع",
+                  en: "Short project description",
+                },
                 link: "https://",
-                cta: "زيارة المشروع",
+                cta: { ar: "زيارة المشروع", en: "Visit project" },
               })
             }
           >
@@ -717,74 +1455,162 @@ const Dashboard = () => {
       <section className="dashboard-section">
         <h2>التوصيات</h2>
         <div className="dashboard-grid">
-          <label>
-            عنوان القسم
-            <input
-              type="text"
-              value={content.reviews.title}
-              onChange={(event) =>
-                updateContent(["reviews", "title"], event.target.value)
-              }
-            />
-          </label>
-          <label>
-            العنوان الفرعي
-            <input
-              type="text"
-              value={content.reviews.subtitle}
-              onChange={(event) =>
-                updateContent(["reviews", "subtitle"], event.target.value)
-              }
-            />
-          </label>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              عنوان القسم (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.reviews.title, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(["reviews", "title"], "ar", event.target.value)
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Title (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.reviews.title, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(["reviews", "title"], "en", event.target.value)
+                }
+              />
+            </label>
+          </div>
+          <div className="dashboard-lang-row">
+            <label className="dashboard-lang-field">
+              العنوان الفرعي (عربي)
+              <input
+                type="text"
+                value={getLocalizedValue(content.reviews.subtitle, "ar")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["reviews", "subtitle"],
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+            <label className="dashboard-lang-field">
+              Subtitle (English)
+              <input
+                type="text"
+                value={getLocalizedValue(content.reviews.subtitle, "en")}
+                onChange={(event) =>
+                  updateLocalizedValue(
+                    ["reviews", "subtitle"],
+                    "en",
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          </div>
         </div>
         <div className="dashboard-list">
           {content.reviews.items.map((item, index) => (
             <div key={`review-${index}`} className="dashboard-card">
-              <label>
-                الاسم
-                <input
-                  type="text"
-                  value={item.name}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["reviews", "items"],
-                      index,
-                      "name",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
-              <label>
-                الوظيفة
-                <input
-                  type="text"
-                  value={item.role}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["reviews", "items"],
-                      index,
-                      "role",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
-              <label>
-                النص
-                <textarea
-                  value={item.text}
-                  onChange={(event) =>
-                    updateArrayItem(
-                      ["reviews", "items"],
-                      index,
-                      "text",
-                      event.target.value
-                    )
-                  }
-                />
-              </label>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  الاسم (عربي)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.name, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["reviews", "items"],
+                        index,
+                        "name",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  Name (English)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.name, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["reviews", "items"],
+                        index,
+                        "name",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  الوظيفة (عربي)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.role, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["reviews", "items"],
+                        index,
+                        "role",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  Role (English)
+                  <input
+                    type="text"
+                    value={getLocalizedValue(item.role, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["reviews", "items"],
+                        index,
+                        "role",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
+              <div className="dashboard-lang-row">
+                <label className="dashboard-lang-field">
+                  النص (عربي)
+                  <textarea
+                    value={getLocalizedValue(item.text, "ar")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["reviews", "items"],
+                        index,
+                        "text",
+                        "ar",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+                <label className="dashboard-lang-field">
+                  Text (English)
+                  <textarea
+                    value={getLocalizedValue(item.text, "en")}
+                    onChange={(event) =>
+                      updateArrayItemLocalized(
+                        ["reviews", "items"],
+                        index,
+                        "text",
+                        "en",
+                        event.target.value
+                      )
+                    }
+                  />
+                </label>
+              </div>
               <button
                 type="button"
                 className="btn btn-light"
@@ -799,9 +1625,9 @@ const Dashboard = () => {
             className="btn"
             onClick={() =>
               addArrayItem(["reviews", "items"], {
-                name: "عميل جديد",
-                role: "المنصب",
-                text: "نص التوصية",
+                name: { ar: "عميل جديد", en: "New client" },
+                role: { ar: "المنصب", en: "Role" },
+                text: { ar: "نص التوصية", en: "Testimonial text" },
               })
             }
           >
@@ -844,12 +1670,28 @@ const Dashboard = () => {
             <div key={`footer-link-${index}`} className="dashboard-row">
               <input
                 type="text"
-                value={link.label}
+                value={getLocalizedValue(link.label, "ar")}
+                placeholder="عربي"
                 onChange={(event) =>
-                  updateArrayItem(
+                  updateArrayItemLocalized(
                     ["footer", "links"],
                     index,
                     "label",
+                    "ar",
+                    event.target.value
+                  )
+                }
+              />
+              <input
+                type="text"
+                value={getLocalizedValue(link.label, "en")}
+                placeholder="English"
+                onChange={(event) =>
+                  updateArrayItemLocalized(
+                    ["footer", "links"],
+                    index,
+                    "label",
+                    "en",
                     event.target.value
                   )
                 }
@@ -879,7 +1721,10 @@ const Dashboard = () => {
             type="button"
             className="btn"
             onClick={() =>
-              addArrayItem(["footer", "links"], { label: "رابط جديد", href: "#" })
+              addArrayItem(["footer", "links"], {
+                label: { ar: "رابط جديد", en: "New link" },
+                href: "#",
+              })
             }
           >
             إضافة رابط

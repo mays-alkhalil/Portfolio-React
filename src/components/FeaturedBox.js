@@ -7,12 +7,12 @@ import { useContent } from "../content/ContentContext";
 const FeaturedBox = () => {
   const el = useRef(null);
   const typed = useRef(null);
-  const { content } = useContent();
-  const { featured } = content;
+  const { content, getLocalized, language } = useContent();
+  const { featured, sectionStyles } = content;
 
   useEffect(() => {
     typed.current = new Typed(el.current, {
-      strings: featured.typedRoles,
+      strings: featured.typedRoles.map((role) => getLocalized(role)),
       typeSpeed: 55,
       backSpeed: 35,
       backDelay: 1500,
@@ -29,7 +29,14 @@ const FeaturedBox = () => {
         typed.current.destroy();
       }
     };
-  }, [featured.typedRoles]);
+  }, [featured.typedRoles, getLocalized, language]);
+
+  const imageSizes = featured.image.sizes || {};
+  const profileSizeVars = {
+    "--profile-size-desktop": `${imageSizes.desktop || 260}px`,
+    "--profile-size-tablet": `${imageSizes.tablet || 200}px`,
+    "--profile-size-mobile": `${imageSizes.mobile || 160}px`,
+  };
 
   return (
     <div>
@@ -45,15 +52,24 @@ const FeaturedBox = () => {
         />
       </Helmet>
 
-      <section className="featured-box section" id="home">
+      <section
+        className="featured-box section"
+        id="home"
+        style={{
+          "--text-color": sectionStyles.featured.text,
+          "--body-color": sectionStyles.featured.background,
+          backgroundColor: sectionStyles.featured.background,
+          color: sectionStyles.featured.text,
+        }}
+      >
         <div className="featured-text">
           <div className="hello">
-            <p>{featured.greeting}</p>
+            <p>{getLocalized(featured.greeting)}</p>
             <span ref={el} className="typedText"></span>
           </div>
 
           <div className="text-info">
-            <p style={{ marginTop: "25px" }}>{featured.introText}</p>
+            <p style={{ marginTop: "25px" }}>{getLocalized(featured.introText)}</p>
           </div>
 
           <div className="text-btn">
@@ -68,7 +84,7 @@ const FeaturedBox = () => {
                 }
               }}
             >
-              {featured.hireButtonLabel}
+              {getLocalized(featured.hireButtonLabel)}
             </button>
 
             <a
@@ -76,7 +92,7 @@ const FeaturedBox = () => {
               className="btn"
               download={featured.cv.filename}
             >
-              {featured.cv.label} <i className="uil uil-file"></i>
+              {getLocalized(featured.cv.label)} <i className="uil uil-file"></i>
             </a>
           </div>
 
@@ -120,8 +136,9 @@ const FeaturedBox = () => {
           <div className="image">
             <img
               src={featured.image.src}
-              alt={featured.image.alt}
-              className="Profile"
+              alt={getLocalized(featured.image.alt)}
+              className="Profile profile-responsive"
+              style={profileSizeVars}
             />
           </div>
         </div>

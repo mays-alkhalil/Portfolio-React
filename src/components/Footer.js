@@ -3,17 +3,24 @@ import "./styles/style.css";
 import { useContent } from "../content/ContentContext";
 
 const Footer = () => {
-  const { content } = useContent();
-  const { footer } = content;
+  const { content, getLocalized } = useContent();
+  const { footer, sectionStyles } = content;
 
   return (
-    <footer>
+    <footer
+      style={{
+        "--text-color": sectionStyles.footer.text,
+        "--body-color": sectionStyles.footer.background,
+        backgroundColor: sectionStyles.footer.background,
+        color: sectionStyles.footer.text,
+      }}
+    >
       {/* Middle Footer */}
       <div className="middle-footer">
         <ul className="footer-menu">
           {footer.links.map((link) => (
             <li className="footer_menu_list" key={link.href}>
-              <a href={link.href}>{link.label}</a>
+              <a href={link.href}>{getLocalized(link.label)}</a>
             </li>
           ))}
         </ul>

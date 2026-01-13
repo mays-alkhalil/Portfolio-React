@@ -7,8 +7,8 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const Reviews = () => {
-  const { content } = useContent();
-  const { reviews } = content;
+  const { content, getLocalized } = useContent();
+  const { reviews, sectionStyles } = content;
 
   return (
     <div>
@@ -26,19 +26,28 @@ const Reviews = () => {
 
       <Navbar />
 
-      <section className="reviews-section" id="reviews">
+      <section
+        className="reviews-section"
+        id="reviews"
+        style={{
+          "--text-color": sectionStyles.reviews.text,
+          "--body-color": sectionStyles.reviews.background,
+          backgroundColor: sectionStyles.reviews.background,
+          color: sectionStyles.reviews.text,
+        }}
+      >
         <div className="top-header">
-          <h1>{reviews.title}</h1>
-          <p className="subtitle">{reviews.subtitle}</p>
+          <h1>{getLocalized(reviews.title)}</h1>
+          <p className="subtitle">{getLocalized(reviews.subtitle)}</p>
         </div>
 
         <div className="reviews-container">
           {reviews.items.map((review) => (
-            <div key={review.name} className="review-card">
+            <div key={getLocalized(review.name)} className="review-card">
               <div className="review-content">
-                <h3>{review.name}</h3>
-                <span className="review-role">{review.role}</span>
-                <p>{review.text}</p>
+                <h3>{getLocalized(review.name)}</h3>
+                <span className="review-role">{getLocalized(review.role)}</span>
+                <p>{getLocalized(review.text)}</p>
               </div>
             </div>
           ))}

@@ -7,8 +7,8 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const Experience = () => {
-  const { content } = useContent();
-  const { experience } = content;
+  const { content, getLocalized } = useContent();
+  const { experience, sectionStyles } = content;
 
   return (
     <div>
@@ -26,15 +26,23 @@ const Experience = () => {
 
       <Navbar />
 
-      <section className="experience-section">
-        <h1 className="section-title">{experience.title}</h1>
+      <section
+        className="experience-section"
+        style={{
+          "--text-color": sectionStyles.experience.text,
+          "--body-color": sectionStyles.experience.background,
+          backgroundColor: sectionStyles.experience.background,
+          color: sectionStyles.experience.text,
+        }}
+      >
+        <h1 className="section-title">{getLocalized(experience.title)}</h1>
 
         <div className="experience-container">
           {experience.items.map((item) => (
-            <div className="experience-card" key={item.role}>
-              <h3>{item.role}</h3>
+            <div className="experience-card" key={getLocalized(item.role)}>
+              <h3>{getLocalized(item.role)}</h3>
               <span className="exp-duration">{item.duration}</span>
-              <p>{item.description}</p>
+              <p>{getLocalized(item.description)}</p>
             </div>
           ))}
         </div>

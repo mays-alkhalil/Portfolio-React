@@ -4,8 +4,15 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const About = () => {
-  const { content } = useContent();
-  const { about } = content;
+  const { content, getLocalized } = useContent();
+  const { about, sectionStyles } = content;
+
+  const imageSizes = about.image.sizes || {};
+  const profileSizeVars = {
+    "--profile-size-desktop": `${imageSizes.desktop || 220}px`,
+    "--profile-size-tablet": `${imageSizes.tablet || 180}px`,
+    "--profile-size-mobile": `${imageSizes.mobile || 140}px`,
+  };
 
   return (
     <div>
@@ -17,10 +24,19 @@ const About = () => {
         />
       </Helmet>
 
-      <section className="section" id="about">
+      <section
+        className="section"
+        id="about"
+        style={{
+          "--text-color": sectionStyles.about.text,
+          "--body-color": sectionStyles.about.background,
+          backgroundColor: sectionStyles.about.background,
+          color: sectionStyles.about.text,
+        }}
+      >
         <div className="top-header">
-          <h1>{about.title}</h1>
-          <p className="subtitle">{about.subtitle}</p>
+          <h1>{getLocalized(about.title)}</h1>
+          <p className="subtitle">{getLocalized(about.subtitle)}</p>
         </div>
 
         <div className="row">
@@ -29,13 +45,16 @@ const About = () => {
               <figcaption>
                 <img
                   src={about.image.src}
-                  alt={about.image.alt}
-                  className="Profile"
+                  alt={getLocalized(about.image.alt)}
+                  className="Profile profile-responsive"
+                  style={profileSizeVars}
                 />
-                <h2>{about.roleHeadline}</h2>
+                <h2>{getLocalized(about.roleHeadline)}</h2>
 
                 {about.paragraphs.map((paragraph, index) => (
-                  <p key={`about-paragraph-${index}`}>{paragraph}</p>
+                  <p key={`about-paragraph-${index}`}>
+                    {getLocalized(paragraph)}
+                  </p>
                 ))}
 
               

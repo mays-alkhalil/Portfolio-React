@@ -5,8 +5,8 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const Contact = () => {
-  const { content } = useContent();
-  const { contact } = content;
+  const { content, getLocalized } = useContent();
+  const { contact, sectionStyles } = content;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -67,10 +67,19 @@ const Contact = () => {
         />
       </Helmet>
 
-      <section className="section" id="contact">
+      <section
+        className="section"
+        id="contact"
+        style={{
+          "--text-color": sectionStyles.contact.text,
+          "--body-color": sectionStyles.contact.background,
+          backgroundColor: sectionStyles.contact.background,
+          color: sectionStyles.contact.text,
+        }}
+      >
         <div className="top-header">
-          <h1>{contact.title}</h1>
-          <span>{contact.subtitle}</span>
+          <h1>{getLocalized(contact.title)}</h1>
+          <span>{getLocalized(contact.subtitle)}</span>
         </div>
         <div className="row">
           <div className="col">

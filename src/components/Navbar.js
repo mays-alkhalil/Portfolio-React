@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import './styles/style.css';
-import { Link } from 'react-router-dom'; // استيراد Link من react-router-dom
+import React, { useEffect, useState } from "react";
+import "./styles/style.css";
+import { Link } from "react-router-dom"; // استيراد Link من react-router-dom
+import { useContent } from "../content/ContentContext";
 
 const Navbar = ({ activeLink }) => {
+  const { language, toggleLanguage } = useContent();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window === 'undefined') {
@@ -29,6 +31,15 @@ const Navbar = ({ activeLink }) => {
     setIsDarkMode((prevMode) => !prevMode);
   };
 
+  const navLabels = {
+    home: { ar: "الرئيسية", en: "Home" },
+    about: { ar: "من أنا", en: "About" },
+    projects: { ar: "المشاريع", en: "Projects" },
+    contact: { ar: "تواصل", en: "Contact" },
+  };
+
+  const getLabel = (value) => (language === "ar" ? value.ar : value.en);
+
   return (
     <nav id="header">
       <div className="nav-logo">
@@ -41,7 +52,7 @@ const Navbar = ({ activeLink }) => {
               to="/"
               className={`nav-link ${activeLink === "#home" ? "active-link" : ""}`}
             >
-              Home
+              {getLabel(navLabels.home)}
             </Link>
             <div className="circle"></div>
           </li>
@@ -50,7 +61,7 @@ const Navbar = ({ activeLink }) => {
               href="#about"
               className={`nav-link ${activeLink === "#about" ? "active-link" : ""}`}
             >
-              About
+              {getLabel(navLabels.about)}
             </a>
             <div className="circle"></div>
           </li>
@@ -59,7 +70,7 @@ const Navbar = ({ activeLink }) => {
               href="#Projects"
               className={`nav-link ${activeLink === "#Projects" ? "active-link" : ""}`}
             >
-              Projects
+              {getLabel(navLabels.projects)}
             </a>
             <div className="circle"></div>
           </li>
@@ -68,7 +79,7 @@ const Navbar = ({ activeLink }) => {
               href="#contact"
               className={`nav-link ${activeLink === "#contact" ? "active-link" : ""}`}
             >
-              Contact
+              {getLabel(navLabels.contact)}
             </a>
             <div className="circle"></div>
           </li>
@@ -79,6 +90,9 @@ const Navbar = ({ activeLink }) => {
         <div className="moon-sun" id="toggle-switch" onClick={toggleDarkMode}>
           <i className={`fa ${isDarkMode ? "fa-sun" : "fa-moon"}`} id={isDarkMode ? "sun" : "moon"}></i>
         </div>
+        <button className="lang-toggle" type="button" onClick={toggleLanguage}>
+          {language === "ar" ? "EN" : "ع"}
+        </button>
       </div>
 
       <div className="nav-menu-btn" onClick={toggleMenu}>
