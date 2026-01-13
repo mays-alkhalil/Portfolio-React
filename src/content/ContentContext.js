@@ -115,8 +115,22 @@ export const ContentProvider = ({ children }) => {
       const keys = Array.isArray(path) ? path : path.split(".");
       let current = next;
 
-      keys.slice(0, -1).forEach((key) => {
-        current[key] = current[key] ?? {};
+      keys.slice(0, -1).forEach((key, index) => {
+        const nextKey = keys[index + 1];
+        const existingValue = current[key];
+
+        if (
+          typeof existingValue !== "object" ||
+          existingValue === null ||
+          Array.isArray(existingValue)
+        ) {
+          if (typeof existingValue === "string" && (nextKey === "ar" || nextKey === "en")) {
+            current[key] = { ar: existingValue, en: existingValue };
+          } else {
+            current[key] = {};
+          }
+        }
+
         current = current[key];
       });
 
