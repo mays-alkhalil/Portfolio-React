@@ -4,8 +4,9 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const About = () => {
-  const { content, getLocalized } = useContent();
-  const { about, sectionStyles } = content;
+  const { content, getLocalized, getSectionStyle } = useContent();
+  const { about } = content;
+  const sectionStyle = getSectionStyle("about");
 
   const imageSizes = about.image.sizes || {};
   const profileSizeVars = {
@@ -28,10 +29,10 @@ const About = () => {
         className="section"
         id="about"
         style={{
-          "--text-color": sectionStyles.about.text,
-          "--body-color": sectionStyles.about.background,
-          backgroundColor: sectionStyles.about.background,
-          color: sectionStyles.about.text,
+          "--text-color": sectionStyle.text,
+          "--body-color": sectionStyle.background,
+          backgroundColor: sectionStyle.background,
+          color: sectionStyle.text,
         }}
       >
         <div className="top-header">

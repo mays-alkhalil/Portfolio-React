@@ -3,16 +3,17 @@ import "./styles/style.css";
 import { useContent } from "../content/ContentContext";
 
 const Footer = () => {
-  const { content, getLocalized } = useContent();
-  const { footer, sectionStyles } = content;
+  const { content, getLocalized, getSectionStyle } = useContent();
+  const { footer } = content;
+  const sectionStyle = getSectionStyle("footer");
 
   return (
     <footer
       style={{
-        "--text-color": sectionStyles.footer.text,
-        "--body-color": sectionStyles.footer.background,
-        backgroundColor: sectionStyles.footer.background,
-        color: sectionStyles.footer.text,
+        "--text-color": sectionStyle.text,
+        "--body-color": sectionStyle.background,
+        backgroundColor: sectionStyle.background,
+        color: sectionStyle.text,
       }}
     >
       {/* Middle Footer */}

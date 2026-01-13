@@ -7,8 +7,9 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const Experience = () => {
-  const { content, getLocalized } = useContent();
-  const { experience, sectionStyles } = content;
+  const { content, getLocalized, getSectionStyle } = useContent();
+  const { experience } = content;
+  const sectionStyle = getSectionStyle("experience");
 
   return (
     <div>
@@ -29,10 +30,10 @@ const Experience = () => {
       <section
         className="experience-section"
         style={{
-          "--text-color": sectionStyles.experience.text,
-          "--body-color": sectionStyles.experience.background,
-          backgroundColor: sectionStyles.experience.background,
-          color: sectionStyles.experience.text,
+          "--text-color": sectionStyle.text,
+          "--body-color": sectionStyle.background,
+          backgroundColor: sectionStyle.background,
+          color: sectionStyle.text,
         }}
       >
         <h1 className="section-title">{getLocalized(experience.title)}</h1>

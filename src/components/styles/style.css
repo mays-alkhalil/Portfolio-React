@@ -277,6 +277,23 @@ body.dark #moon{
     min-height: 700px;
 }
 
+@media (min-width: 992px){
+    .featured-box.rtl-layout{
+        flex-direction: row-reverse;
+    }
+
+    .featured-box.rtl-layout .featured-text{
+        padding-left: 0;
+        padding-right: 20px;
+        align-items: flex-end;
+        text-align: right;
+    }
+
+    .featured-box.rtl-layout .text-btn{
+        justify-content: flex-end;
+    }
+}
+
 
 /* featured text */
 .featured-text{

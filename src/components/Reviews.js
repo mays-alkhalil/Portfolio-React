@@ -7,8 +7,9 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const Reviews = () => {
-  const { content, getLocalized } = useContent();
-  const { reviews, sectionStyles } = content;
+  const { content, getLocalized, getSectionStyle } = useContent();
+  const { reviews } = content;
+  const sectionStyle = getSectionStyle("reviews");
 
   return (
     <div>
@@ -30,10 +31,10 @@ const Reviews = () => {
         className="reviews-section"
         id="reviews"
         style={{
-          "--text-color": sectionStyles.reviews.text,
-          "--body-color": sectionStyles.reviews.background,
-          backgroundColor: sectionStyles.reviews.background,
-          color: sectionStyles.reviews.text,
+          "--text-color": sectionStyle.text,
+          "--body-color": sectionStyle.background,
+          backgroundColor: sectionStyle.background,
+          color: sectionStyle.text,
         }}
       >
         <div className="top-header">

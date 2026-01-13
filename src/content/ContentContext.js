@@ -11,7 +11,9 @@ import defaultContent from "./defaultContent";
 const ContentContext = createContext(null);
 const STORAGE_KEY = "portfolioContent";
 const LANGUAGE_KEY = "portfolioLanguage";
+const THEME_KEY = "theme";
 const DEFAULT_LANGUAGE = "ar";
+const DEFAULT_THEME = "light";
 
 const isLocalizedObject = (value) =>
   value && typeof value === "object" && ("ar" in value || "en" in value);
@@ -58,6 +60,12 @@ export const ContentProvider = ({ children }) => {
     }
     return window.localStorage.getItem(LANGUAGE_KEY) || DEFAULT_LANGUAGE;
   });
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") {
+      return DEFAULT_THEME;
+    }
+    return window.localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
+  });
   const [content, setContent] = useState(() => {
     if (typeof window === "undefined") {
       return defaultContent;
@@ -92,6 +100,15 @@ export const ContentProvider = ({ children }) => {
     document.documentElement.setAttribute("dir", language === "ar" ? "rtl" : "ltr");
   }, [language]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    document.body.classList.toggle("dark", theme === "dark");
+    document.documentElement.setAttribute("data-theme", theme);
+    window.localStorage.setItem(THEME_KEY, theme);
+  }, [theme]);
+
   const updateContent = (path, value) => {
     setContent((prev) => {
       const next = cloneContent(prev);
@@ -117,6 +134,10 @@ export const ContentProvider = ({ children }) => {
     setLanguage((prev) => (prev === "ar" ? "en" : "ar"));
   }, []);
 
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  }, []);
+
   const getLocalized = useCallback(
     (value) => {
       if (!isLocalizedObject(value)) {
@@ -125,6 +146,18 @@ export const ContentProvider = ({ children }) => {
       return value[language] ?? value.en ?? value.ar ?? "";
     },
     [language]
+  );
+
+  const getSectionStyle = useCallback(
+    (key) => {
+      const lightStyle = content.sectionStyles?.[key] || {};
+      const darkStyle = content.sectionStylesDark?.[key] || {};
+      if (theme === "dark") {
+        return { ...lightStyle, ...darkStyle };
+      }
+      return lightStyle;
+    },
+    [content.sectionStyles, content.sectionStylesDark, theme]
   );
 
   const value = useMemo(
@@ -137,8 +170,20 @@ export const ContentProvider = ({ children }) => {
       setLanguage,
       toggleLanguage,
       getLocalized,
+      theme,
+      setTheme,
+      toggleTheme,
+      getSectionStyle,
     }),
-    [content, language, getLocalized, toggleLanguage]
+    [
+      content,
+      language,
+      theme,
+      getLocalized,
+      toggleLanguage,
+      toggleTheme,
+      getSectionStyle,
+    ]
   );
 
   return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>;

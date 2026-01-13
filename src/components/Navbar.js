@@ -1,34 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./styles/style.css";
 import { Link } from "react-router-dom"; // استيراد Link من react-router-dom
 import { useContent } from "../content/ContentContext";
 
 const Navbar = ({ activeLink }) => {
-  const { language, toggleLanguage } = useContent();
+  const { language, toggleLanguage, theme, toggleTheme } = useContent();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window === 'undefined') {
-      return false;
-    }
-    return window.localStorage.getItem('theme') === 'dark';
-  });
 
   const toggleMenu = () => {
     setIsMenuOpen(prevState => !prevState);
-  };
-
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-    const theme = isDarkMode ? 'dark' : 'light';
-    document.body.classList.toggle('dark', isDarkMode);
-    document.documentElement.setAttribute('data-theme', theme);
-    window.localStorage.setItem('theme', theme);
-  }, [isDarkMode]);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
   };
 
   const navLabels = {
@@ -87,8 +67,8 @@ const Navbar = ({ activeLink }) => {
       </div>
 
       <div className="mode">
-        <div className="moon-sun" id="toggle-switch" onClick={toggleDarkMode}>
-          <i className={`fa ${isDarkMode ? "fa-sun" : "fa-moon"}`} id={isDarkMode ? "sun" : "moon"}></i>
+        <div className="moon-sun" id="toggle-switch" onClick={toggleTheme}>
+          <i className={`fa ${theme === "dark" ? "fa-sun" : "fa-moon"}`} id={theme === "dark" ? "sun" : "moon"}></i>
         </div>
         <button className="lang-toggle" type="button" onClick={toggleLanguage}>
           {language === "ar" ? "EN" : "ع"}

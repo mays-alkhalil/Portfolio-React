@@ -399,6 +399,16 @@ const defaultContent = {
     completedProjects: { background: "#ffffff", text: "#1f1f1f" },
     footer: { background: "#0b0b0b", text: "#ffffff" },
   },
+  sectionStylesDark: {
+    featured: { background: "#0f172a", text: "#f8fafc" },
+    about: { background: "#0b1220", text: "#e2e8f0" },
+    projects: { background: "#0f172a", text: "#f8fafc" },
+    contact: { background: "#0b1220", text: "#e2e8f0" },
+    reviews: { background: "#0f172a", text: "#f8fafc" },
+    experience: { background: "#0b1220", text: "#e2e8f0" },
+    completedProjects: { background: "#0f172a", text: "#f8fafc" },
+    footer: { background: "#030712", text: "#e2e8f0" },
+  },
 };
 
 export default defaultContent;

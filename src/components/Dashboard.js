@@ -295,6 +295,202 @@ const Dashboard = () => {
       </section>
 
       <section className="dashboard-section">
+        <h2>ألوان الأقسام (دارك مود)</h2>
+        <div className="dashboard-grid">
+          <label>
+            خلفية البطل الرئيسي
+            <input
+              type="color"
+              value={content.sectionStylesDark.featured.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "featured", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص البطل الرئيسي
+            <input
+              type="color"
+              value={content.sectionStylesDark.featured.text}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "featured", "text"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            خلفية قسم من أنا
+            <input
+              type="color"
+              value={content.sectionStylesDark.about.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "about", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص قسم من أنا
+            <input
+              type="color"
+              value={content.sectionStylesDark.about.text}
+              onChange={(event) =>
+                updateContent(["sectionStylesDark", "about", "text"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            خلفية المشاريع
+            <input
+              type="color"
+              value={content.sectionStylesDark.projects.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "projects", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص المشاريع
+            <input
+              type="color"
+              value={content.sectionStylesDark.projects.text}
+              onChange={(event) =>
+                updateContent(["sectionStylesDark", "projects", "text"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            خلفية التواصل
+            <input
+              type="color"
+              value={content.sectionStylesDark.contact.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "contact", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص التواصل
+            <input
+              type="color"
+              value={content.sectionStylesDark.contact.text}
+              onChange={(event) =>
+                updateContent(["sectionStylesDark", "contact", "text"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            خلفية التوصيات
+            <input
+              type="color"
+              value={content.sectionStylesDark.reviews.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "reviews", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص التوصيات
+            <input
+              type="color"
+              value={content.sectionStylesDark.reviews.text}
+              onChange={(event) =>
+                updateContent(["sectionStylesDark", "reviews", "text"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            خلفية الخبرات
+            <input
+              type="color"
+              value={content.sectionStylesDark.experience.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "experience", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص الخبرات
+            <input
+              type="color"
+              value={content.sectionStylesDark.experience.text}
+              onChange={(event) =>
+                updateContent(["sectionStylesDark", "experience", "text"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            خلفية المشاريع المكتملة
+            <input
+              type="color"
+              value={content.sectionStylesDark.completedProjects.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "completedProjects", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص المشاريع المكتملة
+            <input
+              type="color"
+              value={content.sectionStylesDark.completedProjects.text}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "completedProjects", "text"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            خلفية الفوتر
+            <input
+              type="color"
+              value={content.sectionStylesDark.footer.background}
+              onChange={(event) =>
+                updateContent(
+                  ["sectionStylesDark", "footer", "background"],
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label>
+            نص الفوتر
+            <input
+              type="color"
+              value={content.sectionStylesDark.footer.text}
+              onChange={(event) =>
+                updateContent(["sectionStylesDark", "footer", "text"], event.target.value)
+              }
+            />
+          </label>
+        </div>
+      </section>
+
+      <section className="dashboard-section">
         <h2>البطل الرئيسي</h2>
         <div className="dashboard-grid">
           <div className="dashboard-lang-row">

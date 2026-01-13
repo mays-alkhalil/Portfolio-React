@@ -7,8 +7,9 @@ import { useContent } from "../content/ContentContext";
 const FeaturedBox = () => {
   const el = useRef(null);
   const typed = useRef(null);
-  const { content, getLocalized, language } = useContent();
-  const { featured, sectionStyles } = content;
+  const { content, getLocalized, language, getSectionStyle } = useContent();
+  const { featured } = content;
+  const sectionStyle = getSectionStyle("featured");
 
   useEffect(() => {
     typed.current = new Typed(el.current, {
@@ -53,13 +54,13 @@ const FeaturedBox = () => {
       </Helmet>
 
       <section
-        className="featured-box section"
+        className={`featured-box section ${language === "ar" ? "rtl-layout" : ""}`}
         id="home"
         style={{
-          "--text-color": sectionStyles.featured.text,
-          "--body-color": sectionStyles.featured.background,
-          backgroundColor: sectionStyles.featured.background,
-          color: sectionStyles.featured.text,
+          "--text-color": sectionStyle.text,
+          "--body-color": sectionStyle.background,
+          backgroundColor: sectionStyle.background,
+          color: sectionStyle.text,
         }}
       >
         <div className="featured-text">

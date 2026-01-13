@@ -4,8 +4,9 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const Projects = () => {
-  const { content, getLocalized } = useContent();
-  const { projects, sectionStyles } = content;
+  const { content, getLocalized, getSectionStyle } = useContent();
+  const { projects } = content;
+  const sectionStyle = getSectionStyle("projects");
 
   return (
     <div>
@@ -25,10 +26,10 @@ const Projects = () => {
         className="section"
         id="Projects"
         style={{
-          "--text-color": sectionStyles.projects.text,
-          "--body-color": sectionStyles.projects.background,
-          backgroundColor: sectionStyles.projects.background,
-          color: sectionStyles.projects.text,
+          "--text-color": sectionStyle.text,
+          "--body-color": sectionStyle.background,
+          backgroundColor: sectionStyle.background,
+          color: sectionStyle.text,
         }}
       >
         {/* Top Header */}

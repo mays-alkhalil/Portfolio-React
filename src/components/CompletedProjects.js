@@ -6,8 +6,9 @@ import { Helmet } from "react-helmet";
 import { useContent } from "../content/ContentContext";
 
 const CompletedProjects = () => {
-  const { content, getLocalized } = useContent();
-  const { completedProjects, sectionStyles } = content;
+  const { content, getLocalized, getSectionStyle } = useContent();
+  const { completedProjects } = content;
+  const sectionStyle = getSectionStyle("completedProjects");
 
   return (
     <div>
@@ -28,10 +29,10 @@ const CompletedProjects = () => {
       <section
         className="projects-section"
         style={{
-          "--text-color": sectionStyles.completedProjects.text,
-          "--body-color": sectionStyles.completedProjects.background,
-          backgroundColor: sectionStyles.completedProjects.background,
-          color: sectionStyles.completedProjects.text,
+          "--text-color": sectionStyle.text,
+          "--body-color": sectionStyle.background,
+          backgroundColor: sectionStyle.background,
+          color: sectionStyle.text,
         }}
       >
         <h1 className="section-title">{getLocalized(completedProjects.title)}</h1>
