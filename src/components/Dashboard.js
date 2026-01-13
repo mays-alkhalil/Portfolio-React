@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
 import { useContent } from "../content/ContentContext";
 import { logout } from "../content/auth";
 import "./styles/Dashboard.css";
@@ -8,6 +7,17 @@ import "./styles/Dashboard.css";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { content, updateContent, resetContent } = useContent();
+
+  const handleFileUpload = (file, onLoad) => {
+    if (!file) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      onLoad(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
 
   const updateArrayItem = (path, index, field, value) => {
     const current = path.reduce((acc, key) => acc[key], content);
@@ -38,7 +48,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-page">
-      <Navbar />
       <section className="dashboard-hero">
         <div>
           <h1>لوحة التحكم بالمحتوى</h1>
@@ -121,6 +130,22 @@ const Dashboard = () => {
             />
           </label>
           <label>
+            رفع السيرة الذاتية (PDF)
+            <input
+              type="file"
+              accept=".pdf"
+              onChange={(event) =>
+                handleFileUpload(event.target.files?.[0], (result) => {
+                  updateContent(["featured", "cv", "link"], result);
+                  updateContent(
+                    ["featured", "cv", "filename"],
+                    event.target.files?.[0]?.name || content.featured.cv.filename
+                  );
+                })
+              }
+            />
+          </label>
+          <label>
             عنوان السيرة الذاتية
             <input
               type="text"
@@ -150,6 +175,18 @@ const Dashboard = () => {
               value={content.featured.image.src}
               onChange={(event) =>
                 updateContent(["featured", "image", "src"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            رفع صورة البروفايل
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) =>
+                handleFileUpload(event.target.files?.[0], (result) => {
+                  updateContent(["featured", "image", "src"], result);
+                })
               }
             />
           </label>
@@ -286,6 +323,18 @@ const Dashboard = () => {
               value={content.about.image.src}
               onChange={(event) =>
                 updateContent(["about", "image", "src"], event.target.value)
+              }
+            />
+          </label>
+          <label>
+            رفع صورة قسم من أنا
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) =>
+                handleFileUpload(event.target.files?.[0], (result) => {
+                  updateContent(["about", "image", "src"], result);
+                })
               }
             />
           </label>

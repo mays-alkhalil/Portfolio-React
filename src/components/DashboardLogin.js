@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
 import { authInfo, login } from "../content/auth";
 import "./styles/DashboardLogin.css";
 
@@ -23,7 +22,6 @@ const DashboardLogin = () => {
 
   return (
     <div className="dashboard-login-page">
-      <Navbar />
       <section className="dashboard-login-card">
         <h1>تسجيل الدخول للوحة التحكم</h1>
         <p>
