@@ -1,7 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { ContentProvider } from "./content/ContentContext";
 // import reportWebVitals from './reportWebVitals';
 
 const getInitialTheme = () => {
@@ -24,10 +25,12 @@ if (typeof window !== 'undefined') {
   window.localStorage.setItem('theme', initialTheme);
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ContentProvider>
+      <App />
+    </ContentProvider>
   </React.StrictMode>
 );
 

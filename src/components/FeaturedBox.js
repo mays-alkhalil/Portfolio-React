@@ -2,35 +2,34 @@ import React, { useEffect, useRef } from "react";
 import Typed from "typed.js";
 import "./styles/style.css";
 import { Helmet } from "react-helmet";
+import { useContent } from "../content/ContentContext";
 
 const FeaturedBox = () => {
   const el = useRef(null);
   const typed = useRef(null);
+  const { content } = useContent();
+  const { featured } = content;
 
   useEffect(() => {
-typed.current = new Typed(el.current, {
-  strings: [
-    "Full Stack Web Developer",
-    "Laravel & React Developer",
-    "Automation & API Integration Engineer",
-    "Programming Instructor",
-    "Problem Solver & Fast Learner"
-  ],
-  typeSpeed: 55,
-  backSpeed: 35,
-  backDelay: 1500,
-  smartBackspace: true,
-  loop: true,
-  startDelay: 300,
-  showCursor: true,
-  cursorChar: "|",
-  contentType: "null" // مهم: يمنع تفسير & ككيان HTML
-});
+    typed.current = new Typed(el.current, {
+      strings: featured.typedRoles,
+      typeSpeed: 55,
+      backSpeed: 35,
+      backDelay: 1500,
+      smartBackspace: true,
+      loop: true,
+      startDelay: 300,
+      showCursor: true,
+      cursorChar: "|",
+      contentType: "null", // مهم: يمنع تفسير & ككيان HTML
+    });
 
     return () => {
-      typed.current.destroy();
+      if (typed.current) {
+        typed.current.destroy();
+      }
     };
-  }, []);
+  }, [featured.typedRoles]);
 
   return (
     <div>
@@ -49,39 +48,41 @@ typed.current = new Typed(el.current, {
       <section className="featured-box section" id="home">
         <div className="featured-text">
           <div className="hello">
-            <p>Hello I’m</p>
+            <p>{featured.greeting}</p>
             <span ref={el} className="typedText"></span>
           </div>
 
           <div className="text-info">
-            <p style={{ marginTop: "25px" }}>
-              “I develop full-stack web solutions and teach programming with a focus on real-world applications.”
-            </p>
+            <p style={{ marginTop: "25px" }}>{featured.introText}</p>
           </div>
 
           <div className="text-btn">
             <button
               className="btn hire-btn"
               onClick={() => {
-                const contactSection = document.getElementById("contact");
-                contactSection.scrollIntoView({ behavior: "smooth" });
+                const contactSection = document.getElementById(
+                  featured.hireButtonTarget
+                );
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: "smooth" });
+                }
               }}
             >
-              Hire Me
+              {featured.hireButtonLabel}
             </button>
 
             <a
-              href="/mays_resume_Web_Developer.pdf"
+              href={featured.cv.link}
               className="btn"
-              download="mays resume Web Developer.pdf"
+              download={featured.cv.filename}
             >
-              Download CV <i className="uil uil-file"></i>
+              {featured.cv.label} <i className="uil uil-file"></i>
             </a>
           </div>
 
           <div className="social_icons">
             <a
-              href="mailto:maysalkhalil02@gmail.com?subject=Hello%20Mays%20I%20would%20like%20to%20connect"
+              href={featured.social.email}
               target="_blank"
               rel="noopener noreferrer"
               className="icon"
@@ -89,7 +90,7 @@ typed.current = new Typed(el.current, {
               <i className="fas fa-envelope"></i>
             </a>
             <a
-              href="https://wa.me/962776506379?text=Hello%20Mays%20I%20would%20like%20to%20connect"
+              href={featured.social.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="icon"
@@ -97,7 +98,7 @@ typed.current = new Typed(el.current, {
               <i className="fab fa-whatsapp"></i>
             </a>
             <a
-              href="https://www.linkedin.com/in/maysalkhalil"
+              href={featured.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="icon"
@@ -105,7 +106,7 @@ typed.current = new Typed(el.current, {
               <i className="fab fa-linkedin"></i>
             </a>
             <a
-              href="https://github.com/mays-alkhalil"
+              href={featured.social.github}
               target="_blank"
               rel="noopener noreferrer"
               className="icon"
@@ -118,8 +119,8 @@ typed.current = new Typed(el.current, {
         <div className="featured-image">
           <div className="image">
             <img
-              src="/assets/mays1.jpg"
-              alt="mays image's"
+              src={featured.image.src}
+              alt={featured.image.alt}
               className="Profile"
             />
           </div>

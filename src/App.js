@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import FeaturedBox from './components/FeaturedBox';
-import About from './components/About';
-import ProjectBox from './components/ProjectBox';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import CompletedProjects from './components/CompletedProjects';
-import Experience from './components/Experience';
-import Reviews from './components/Reviews';
-import './components/styles/style.css';
-import ScrollReveal from 'scrollreveal';
+import Navbar from "./components/Navbar";
+import FeaturedBox from "./components/FeaturedBox";
+import About from "./components/About";
+import ProjectBox from "./components/ProjectBox";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import CompletedProjects from "./components/CompletedProjects";
+import Experience from "./components/Experience";
+import Reviews from "./components/Reviews";
+import Dashboard from "./components/Dashboard";
+import "./components/styles/style.css";
+import ScrollReveal from "scrollreveal";
 
 function App() {
 
@@ -78,6 +79,7 @@ function App() {
         <Route path="/CompletedProjects" element={<CompletedProjects />} />
         <Route path="/Experience" element={<Experience />} />
         <Route path="/Reviews" element={<Reviews />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
-import './styles/style.css';
-import { Helmet } from 'react-helmet';
+import "./styles/style.css";
+import { Helmet } from "react-helmet";
+import { useContent } from "../content/ContentContext";
 
 const Contact = () => {
+  const { content } = useContent();
+  const { contact } = content;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,85 +54,83 @@ const Contact = () => {
   };
     
   return (
-    <div> 
-          <Helmet>
-  <title>Contact Me - Mays' Portfolio</title>
-  <meta
-    name="description"
-    content="Get in touch with Mays to discuss projects, collaborations, or for any inquiries. Reach out through email or fill out the contact form."
-  />
-  <meta
-    name="keywords"
-    content="Contact, Web Developer, Mays Portfolio, Contact Form, Web Development, JavaScript, React, Reach out"
-  />
-</Helmet>
+    <div>
+      <Helmet>
+        <title>Contact Me - Mays' Portfolio</title>
+        <meta
+          name="description"
+          content="Get in touch with Mays to discuss projects, collaborations, or for any inquiries. Reach out through email or fill out the contact form."
+        />
+        <meta
+          name="keywords"
+          content="Contact, Web Developer, Mays Portfolio, Contact Form, Web Development, JavaScript, React, Reach out"
+        />
+      </Helmet>
 
-    <section className="section" id="contact">
-      <div className="top-header">
-        <h1>Let's Build Something Exceptional</h1>
-        <span>Whether it’s AI-driven travel or cultural impact platforms, I’d love to collaborate.</span>
-      </div>
-      <div className="row">
-        <div className="col">
-          <div className="contact-info">
-            <h2>
-              Find me <i className="uil uil-corner-right-down" />
-            </h2>
-            <p>
-              <i className="uil uil-envelope" /> maysalkhalil02@gmail.com
-            </p>
-            <p>
-              <i className="uil uil-phone" /> Phone: +962796532179
-            </p>
+      <section className="section" id="contact">
+        <div className="top-header">
+          <h1>{contact.title}</h1>
+          <span>{contact.subtitle}</span>
+        </div>
+        <div className="row">
+          <div className="col">
+            <div className="contact-info">
+              <h2>
+                Find me <i className="uil uil-corner-right-down" />
+              </h2>
+              <p>
+                <i className="uil uil-envelope" /> {contact.email}
+              </p>
+              <p>
+                <i className="uil uil-phone" /> Phone: {contact.phone}
+              </p>
+            </div>
+          </div>
+          <div className="">
+            <form onSubmit={handleSubmit}>
+              <div className="form-inputs">
+                <input
+                  type="text"
+                  name="name"
+                  className="input-field"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+                <input
+                  type="email"
+                  name="email"
+                  className="input-field"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="text-area">
+                <input
+                  type="text"
+                  name="subject"
+                  className="input-subject"
+                  placeholder="Subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                />
+                <textarea
+                  name="message"
+                  placeholder="Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-button">
+                <button type="submit" className="btn">
+                  Send <i className="fa fa-paper-plane" />
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <div className="">
-          <form onSubmit={handleSubmit}>
-            <div className="form-inputs">
-              <input
-                type="text"
-                name="name"
-                className="input-field"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-              <input
-                type="email"
-                name="email"
-                className="input-field"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="text-area">
-              <input
-                type="text"
-                name="subject"
-                className="input-subject"
-                placeholder="Subject"
-                value={formData.subject}
-                onChange={handleChange}
-              />
-              <textarea
-                name="message"
-                placeholder="Message"
-                value={formData.message}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-button">
-              <button type="submit" className="btn">
-                Send <i className="fa fa-paper-plane" />
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-
+      </section>
     </div>
   );
 };
