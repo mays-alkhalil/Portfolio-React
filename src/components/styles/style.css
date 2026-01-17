@@ -404,7 +404,7 @@ i{
     gap: 32px;
     flex-wrap: wrap;
     max-width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
 
 }
 
@@ -485,6 +485,19 @@ cursor: pointer;
     /* يتم تحريك الصورة لأسفل بمقدار 50 بكسل */
 
 }
+}
+
+/* Mobile */
+@media (max-width: 768px){
+    .image{
+        animation: none;
+    }
+}
+@media (max-width: 768px){
+    .featured-image{
+        margin-top: 70px; /* نفس ارتفاع الـ nav */
+        min-height: auto;
+    }
 }
 
 /* main */
@@ -1096,3 +1109,19 @@ body.dark .footer_menu_list a {
     visibility: visible;
   }
   
+@media (max-width: 768px){
+
+    .featured-box{
+        height: auto;
+        min-height: auto;
+        padding-top: 90px; /* ارتفاع nav */
+    }
+
+    .featured-text{
+        min-height: auto;
+    }
+
+    .image{
+        margin-top: 0 !important;
+    }
+}
